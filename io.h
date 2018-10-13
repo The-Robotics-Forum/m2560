@@ -1,13 +1,20 @@
-#include <avr/io.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
 #include <math.h>
+
+#include <avr/pgmspace.h>
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
 #ifndef F_CPU
 #define F_CPU 16000000UL   //SET CPU CLOCK
 #endif
 #include <util/delay.h>
-#include <avr/interrupt.h>
 
-
+//Pin Mapping
+uint8_t x[24]={0,1,4,5,5,};
+char d[24]={'e','e','e','e','g',''};
 
 //Function declaration
 void analogWrite(uint8_t ,uint8_t );
@@ -19,6 +26,8 @@ double constrain(double,double,double);
 void attachIntterupt(int, void *,int);
 void (*cAllisr)(void); //function pointer used in ISR()
 
+
+
 void pinMode(uint8_t , uint8_t );
 static void turnOffPWM(uint8_t );
 void digitalWrite(uint8_t , uint8_t );
@@ -29,6 +38,22 @@ void setup(void);
 void loop(void);
 //Function:
 
+void pinMode(unsigned int i,short unsigned int tipe)
+{
+  
+  switch(d[i])
+  {
+	case'b':
+	         DDRB|=x[i];
+			 break;
+	case'c':
+	          DDRC|=x[i];
+			  break;
+	case'd':
+	         DDRD|=x[i];
+			 break;		  		 		 			 
+	  }
+}
 /*void pinMode(uint8_t pIn, uint8_t mOde)
 {
 	uint8_t bit = digitalPinToBitMask(pIn);
