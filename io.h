@@ -749,10 +749,9 @@ int main(){
 void softwareInterrupt(void(*iSrfun)(void))
 {
 	uSerfun=iSrfun;
-// 	TCCR0A|=(1<<WGM00)|(1<<WGM01)|(1<<CS00)|(1<<CS01)|(1<<WGM02); //fast pwm and prescalar is 1
-// 	TIMSK0|= 1<<TOIE0;                                  //overflow interrupt flag is set
         TCCR1A|=(1<<WGM11);
 	TCCR1B|=(1<<WGM12)|(1<<WGM13)|(1<<CS10);
+	TIMSK1|=(1<<TOIE1);
 }
 
 ISR(TIMER1_OVF_vect)
