@@ -25,7 +25,8 @@ double map(double,double,double,double,double);
 double constrain(double,double,double);
 void attachIntterupt(int, void *,int);
 void (*cAllisr)(void); //function pointer used in ISR()
-
+void softwareInterrupt(void *);
+void (*uSerfun(void));
 
 
 void pinMode(uint8_t , uint8_t );
@@ -744,4 +745,17 @@ int main(){
 	while(1){
 		void loop();
 	}
+}
+void softwareInterrupt(void(*iSrfun)(void))
+{
+	uSerfun=iSrfun;
+// 	TCCR0A|=(1<<WGM00)|(1<<WGM01)|(1<<CS00)|(1<<CS01)|(1<<WGM02); //fast pwm and prescalar is 1
+// 	TIMSK0|= 1<<TOIE0;                                  //overflow interrupt flag is set
+        TCCR1A|=(1<<WGM11);
+	TCCR1B|=(1<<WGM12)|(1<<WGM13)|(1<<CS10);
+}
+
+ISR(TIMER1_OVF_vect)
+{
+	uSerfun();
 }
