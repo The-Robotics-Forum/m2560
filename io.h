@@ -13,8 +13,8 @@
 #include <util/delay.h>
 
 //Pin Mapping
-uint8_t x[24]={0,1,4,5,5,};
-char d[24]={'e','e','e','e','g',''};
+uint8_t x[24]={0,1,4,5,5,5};
+char d[24]={'e','e','e','e','g','g'};
 
 //Function declaration
 void analogWrite(uint8_t ,uint8_t );
@@ -470,7 +470,7 @@ void initADC()
 	ADCSRA=(1<<ADEN)|(1<<ADPS2)|(1<<ADPS1);		//ADC enabled, Prescaler 64
 }
 
-int analogRead(int PiNNo)
+uint8_t analogRead(uint8_t PiNNo)
 {
         //prescalar set to default
   	ADMUX=(1<<REFS0)|(0<<REFS1);
