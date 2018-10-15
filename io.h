@@ -6,15 +6,196 @@
 #include <avr/pgmspace.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
-
+#define HIGH 1
+#define LOW 0
 #ifndef F_CPU
 #define F_CPU 16000000UL   //SET CPU CLOCK
+#define FOSC 16000000
 #endif
 #include <util/delay.h>
+          
+//pinMode
+int c[60]={0,1,4,5,5,3,3,4,5,6,4,5,6,7,1,0,1,0,3,2,1,0,6,7,0,1,2,3,4,5,6,7,7,6,5,4,3,2,1,0,7,2,1,0,7,6,5,4,3,2,1,0,3,2,1,0};
 
-//Pin Mapping
-uint8_t x[24]={0,1,4,5,5,5};
-char d[24]={'e','e','e','e','g','g'};
+char d[60]={'e','e','e','e','g','e','h','h','h','h','b','b','b','b','j','j','h','h','d','d','a','a','a','a','a','a','a','a','c','c','c','c','c','c','c','c','d','g','g','g','l','l','l','l','l','l','l','l','b','b','b','b'};
+	
+void pinMode(unsigned int i,int tipe)
+{
+	int l;
+  if(tipe==0)
+        { switch(d[i])
+         {
+	 
+	          case'b':
+	                  DDRB|=(0<<c[i]);
+			           break;
+	          case'c':
+	                 DDRC|=(0<<c[i]);
+			          break;
+	          case'd':
+	                 DDRD|=(0<<c[i]);
+			          break;
+				//case'h':
+				  //  DDRH|(0<<c[i]);
+		      case'e':
+	                  DDRE|=(0<<c[i]);
+			           break;
+
+			     case'g':
+	                  DDRG|=(0<<c[i]);
+			           break;
+			 case'h':
+	                  DDRH|=(0<<c[i]);
+					  		           break;
+		     
+			     case'j':
+	                  DDRJ|=(0<<c[i]);
+			           break;
+				     case'l':
+	                  DDRL|=(0<<c[i]);
+			           break;	        		   		   	  	  		 		 			 
+	     }  }
+	else{          switch(d[i])
+         {
+	 
+	          case'b':
+	                  DDRB|=(1<<c[i]);
+			           break;
+	          case'c':
+	                 DDRC|=(1<<c[i]);
+			          break;
+	          case'd':
+	                 DDRD|=(1<<c[i]);
+			          break;
+					 
+				    
+		      case'e':
+	                  DDRE|=(1<<c[i]);
+			           break;
+
+			     case'g':
+	                  DDRG|=(1<<c[i]);
+			           break;
+			 case'h':
+	                  DDRH|=(1<<c[i]);
+			           break;
+			     case'j':
+	                  DDRJ|=(1<<c[i]);
+			           break;
+				     case'l':
+	                  DDRL|=(1<<c[i]);
+			           break;	  		 		 			 
+	     }  
+}
+		 }
+void digitalWrite (int i ,int tdipe)		 
+
+{
+   if(tdipe==0)
+        { switch(d[i])
+         {
+	 
+	          case'b':
+	                  PORTB|=(0<<c[i]);
+			           break;
+	          case'c':
+	                 PORTC|=(0<<c[i]);
+			          break;
+	          case'd':
+	                 PORTD|=(0<<c[i]);
+			          break;
+				
+		      case'e':
+	                  PORTE|=(0<<c[i]);
+			           break;
+
+			     case'g':
+	                  PORTG|=(0<<c[i]);
+			           break;
+			 case'h':
+	                  PORTH|=(0<<c[i]);
+			           break;
+		     
+			     case'j':
+	                  PORTJ|=(0<<c[i]);
+			           break;
+				     case'l':
+	                  PORTL|=(0<<c[i]);
+			           break;	        		   		   	  	  		 		 			 
+	     }  }
+	else{          switch(d[i])
+         {
+	 
+	          case'b':
+	                 PORTB|=(1<<c[i]);
+			           break;
+	          case'c':
+	                 PORTC|=(1<<c[i]);
+			          break;
+	          case'd':
+	                 PORTD|=(1<<c[i]);
+			          break;
+				    
+		      case'e':
+	                  PORTE|=(1<<c[i]);
+			           break;
+
+			     case'g':
+	                  PORTG|=(1<<c[i]);
+			           break;
+			 case'h':
+	                  PORTH|=(1<<c[i]);
+			           break;
+		     /*case'i':
+	                  PORTI|=(1<<c[i]);
+			           break;*/
+			     case'j':
+	                  PORTJ|=(1<<c[i]);
+			           break;
+				     case'l':
+	                  PORTL|=(1<<c[i]);
+			           break;	  		 		 			 
+	     }  
+}
+		 }
+		 
+
+uint8_t digitalRead(int i)
+{  uint8_t z;
+	uint8_t x;
+   switch(d[i])
+         {
+	 
+	          case'b':
+	                  z=PINB&(1<<c[i]);
+			           break;
+	          case'c':
+	                  z=PINC&(1<<c[i]);
+			          break;
+	          case'd':
+	                  z=PIND&(1<<c[i]);
+			          break;
+				
+		      case'e':
+	                   z=PINE&(1<<c[i]);
+			           break;
+
+			     case'g':
+	                   z=PING&(1<<c[i]);
+			           break;
+			 case'h':
+	                  z=PINH&(1<<c[i]);
+			           break;
+		     
+			     case'j':
+	                   z=PINJ&(1<<c[i]);
+			           break;
+				     case'l':
+	                   z=PINL&(1<<c[i]);
+			           break;
+					   return z;	        		   		   	  	  		 		 			 
+	     }  }
+
 
 //Function declaration
 void analogWrite(uint8_t ,uint8_t );
@@ -39,22 +220,6 @@ void setup(void);
 void loop(void);
 //Function:
 
-void pinMode(unsigned int i,short unsigned int tipe)
-{
-  
-  switch(d[i])
-  {
-	case'b':
-	         DDRB|=x[i];
-			 break;
-	case'c':
-	          DDRC|=x[i];
-			  break;
-	case'd':
-	         DDRD|=x[i];
-			 break;		  		 		 			 
-	  }
-}
 /*void pinMode(uint8_t pIn, uint8_t mOde)
 {
 	uint8_t bit = digitalPinToBitMask(pIn);
@@ -362,37 +527,173 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
 }
 
 unsigned long pulseIn(volatile uint8_t pInno, uint8_t vAlue)
-{
+{ char x;
   TCCR2A = (1 << WGM21) | (1 << COM2A1) | (1 << FOC2A) | (0 << COM2A0) | (0 << WGM20); //initializing in CTC mode
   TCCR2A = (1 << CS20);
   unsigned long mAxloops = 500000;
   unsigned long wIdth = 0;
   // wait for any previous pulse to end
-  while (((PIND) && (pInno)) == vAlue)
-	  {
-		if (--mAxloops == 0)
-		return 0;
-	  }
+  switch(d[pInno]){
+            case'b':
+	               { while (((PINB) && ((pInno%8))) == vAlue)
+	              {
+		          if (--mAxloops == 0)
+		            return 0;
+	                }
+             // wait for the pulse to start  
+              while (((PINB) && ((pInno%8))) != vAlue)
+	              {
+		     if (--mAxloops == 0) 
+		          return 0;
+	           }
+            // wait for the pulse to stop
+             while (((PINB) && ((pInno%8))) == vAlue)
+	                   {
+	               	if (++wIdth == mAxloops)
+		          return 0;
+	                      }
+              return wIdth;
+                    }  break;
+ case'c':
+	                 { while (((PINC) && ((pInno%8))) == vAlue)
+	                {
+		              if (--mAxloops == 0)
+		               return 0;
+	                   }
   // wait for the pulse to start  
-  while (((PIND) && (pInno)) != vAlue)
-	  {
-		if (--mAxloops == 0)
-		return 0;
-	  }
+                  while (((PINC) && ((pInno%8))) != vAlue)
+	                  {
+		              if (--mAxloops == 0)
+		                 return 0;
+	                      }
   // wait for the pulse to stop
-  while (((PIND) && (pInno)) == vAlue)
-	  {
-		if (++wIdth == mAxloops)
-		return 0;
-	   }
-  return wIdth;
-}
+                while (((PINC) && ((pInno%8))) == vAlue)
+	                 {
+                 		if (++wIdth == mAxloops)
+                  		return 0;
+                     	    }
+                     return wIdth;
+                         }break;
+						 
+	 case'd':
+	     
+	                 { while (((PIND) && ((pInno%8))) == vAlue)
+	                {
+		              if (--mAxloops == 0)
+		               return 0;
+	                   }
+  // wait for the pulse to start  
+                  while (((PIND) && ((pInno%8))) != vAlue)
+	                  {
+		              if (--mAxloops == 0)
+		                 return 0;
+	                      }
+  // wait for the pulse to stop
+                while (((PIND) && ((pInno%8))) == vAlue)
+	                 {
+                 		if (++wIdth == mAxloops)
+                  		return 0;
+                     	    }
+                     return wIdth;
+                         } break; 		//case'h':
+				  //  DDRH|(0<<c[i]);
+	case'e':
+	                  
+	                 { while (((PINE) && ((pInno%8))) == vAlue)
+	                {
+		              if (--mAxloops == 0)
+		               return 0;
+	                   }
+  // wait for the pulse to start  
+                  while (((PINE) && ((pInno%8))) != vAlue)
+	                  {
+		              if (--mAxloops == 0)
+		                 return 0;
+	                      }
+  // wait for the pulse to stop
+                while (((PINE) && ((pInno%8))) == vAlue)
+	                 {
+                 		if (++wIdth == mAxloops)
+                  		return 0;
+                     	    }
+                     return wIdth;
+                         } break; 			    
+	                  
+case'h':
+	                 
+	                 { while (((PINH) && ((pInno%8))) == vAlue)
+	                {
+		              if (--mAxloops == 0)
+		               return 0;
+	                   }
+  // wait for the pulse to start  
+                  while (((PINH) && ((pInno%8))) != vAlue)
+	                  {
+		              if (--mAxloops == 0)
+		                 return 0;
+	                      }
+  // wait for the pulse to stop
+                while (((PINH) && ((pInno%8))) == vAlue)
+	                 {
+                 		if (++wIdth == mAxloops)
+                  		return 0;
+                     	    }
+                     return wIdth;
+                         } break;  
+case'j':
+	                  
+	                 { while (((PINJ) && ((pInno%8))) == vAlue)
+	                {
+		              if (--mAxloops == 0)
+		               return 0;
+	                   }
+  // wait for the pulse to start  
+                  while (((PINJ) && ((pInno%8))) != vAlue)
+	                  {
+		              if (--mAxloops == 0)
+		                 return 0;
+	                      }
+  // wait for the pulse to stop
+                while (((PINJ) && ((pInno%8))) == vAlue)
+	                 {
+                 		if (++wIdth == mAxloops)
+                  		return 0;
+                     	    }
+                     return wIdth;
+                         }  
+			           break;
+case 'l':
+	                  
+	                 { while (((PINL) && (((pInno%8)%8))) == vAlue)
+	                {
+		              if (--mAxloops == 0)
+		               return 0;
+	                   }
+  // wait for the pulse to start  
+                  while (((PINL) && ((pInno%8))) != vAlue)
+	                  {
+		              if (--mAxloops == 0)
+		                 return 0;
+	                      }
+  // wait for the pulse to stop
+                while (((PINL) && ((pInno%8))) == vAlue)
+	                 {
+                 		if (++wIdth == mAxloops)
+                  		return 0;
+                     	    }
+                     return wIdth;
+                         }  
+			           break;	        		   		   	  	  		 		 			 
+	     }  
+					 }					 	
+
 
 class Serial
 {
 	public:
-	void start( unsigned int uBrr){
-		/*Set baud rate */
+	void start( unsigned int BAUD){
+		/*Set baud rate */int uBrr;
+		uBrr=FOSC/16/BAUD-1;
 		UBRR0H = (unsigned char)(uBrr>>8);
 		UBRR0L = (unsigned char)uBrr;
 		/*Enable receiver and transmitter */
@@ -429,12 +730,13 @@ class Serial
 class Serial1
 {
 	public:
-	void start( unsigned int uBrr){
-		/*Set baud rate */
+	void start( unsigned int BAUD){
+int uBrr;		/*Set baud rate */
+		uBrr=FOSC/16/BAUD-1;
 		UBRR1H = (unsigned char)(uBrr>>8);
 		UBRR1L = (unsigned char)uBrr;
 		/*Enable receiver and transmitter */
-		UCSR1B = (1<<RXEN0)|(1<<TXEN0);
+		UCSR1B = (1<<RXEN1)|(1<<TXEN1);
 	}
 	/* Set frame format: 8data, 2stop bit */
 	void send( unsigned char data ){
@@ -464,33 +766,112 @@ class Serial1
 	}
 
 };
+class Serial2
+{
+	public:
+	void start( unsigned int BAUD){
+		/*Set baud rate */
+int uBrr;	  
+		uBrr=(FOSC/16/BAUD-1);
+		UBRR2H = (unsigned char)(uBrr>>8);
+		UBRR2L = (unsigned char)uBrr;
+		/*Enable receiver and transmitter */
+		UCSR2B = (1<<RXEN2)|(1<<TXEN2);
+	}
+	/* Set frame format: 8data, 2stop bit */
+	void send( unsigned char data ){
+		/* Wait for empty transmit buffer */
+		while ( !( UCSR2A & (1<<UDRE2)) )
+		;
+		/* Put data into buffer, sends the data */
+		UDR2= data;
+		_delay_ms(100);
+	}
+	unsigned char get( void ){
+		/* Wait for data to be received */
+		while ( !(UCSR2A & (1<<RXC2)) )
+		;
+		/* Get and return received data from buffer */
+		return UDR2;
+	}
+	void flush(void){
+		unsigned char dUmmy;
+		while ( UCSR2A & (1<<RXC2) ) dUmmy = UDR1
+		;
+	}
+
+	void end(void){
+		flush();
+		UCSR2B&=0xe7;	//disabling RXEN & TXEN
+	}
+
+};
+class Serial3
+{
+	public:
+	void start( unsigned int BAUD){
+		int uBrr;/*Set baud rate */
+		  uBrr=(FOSC/16/BAUD-1);
+		UBRR3H = (unsigned char)(uBrr>>8);
+		UBRR3L = (unsigned char)uBrr;
+		/*Enable receiver and transmitter */
+		UCSR3B = (1<<RXEN3)|(1<<TXEN3);
+	}
+	/* Set frame format: 8data, 2stop bit */
+	void send( unsigned char data ){
+		/* Wait for empty transmit buffer */
+		while ( !( UCSR3A & (1<<UDRE3)) )
+		;
+		/* Put data into buffer, sends the data */
+		UDR3= data;
+		_delay_ms(100);
+	}
+	unsigned char get( void ){
+		/* Wait for data to be received */
+		while ( !(UCSR3A & (1<<RXC3)) )
+		;
+		/* Get and return received data from buffer */
+		return UDR3;
+	}
+	void flush(void){
+		unsigned char dUmmy;
+		while ( UCSR3A & (1<<RXC3) ) dUmmy = UDR1
+		;
+	}
+
+	void end(void){
+		flush();
+		UCSR3B&=0xe7;	//disabling RXEN & TXEN
+	}
+
+};
 void initADC()
 {
 	ADMUX=(1<<REFS0);				//Aref=AVcc
 	ADCSRA=(1<<ADEN)|(1<<ADPS2)|(1<<ADPS1);		//ADC enabled, Prescaler 64
 }
 
-uint8_t analogRead(uint8_t PiNNo)
+int analogRead(int (pInno))
 {
         //prescalar set to default
   	ADMUX=(1<<REFS0)|(0<<REFS1);
   	ADCSRA|=(1<<ADEN);
-        ADMUX|=PiNNo;//chose value from 0 to 7 to chose adc pin accordingly
+        ADMUX|=(pInno%8);//chose value from 0 to 7 to chose adc pin accordingly
         ADCSRA|=(1<<ADEN);
         ADCSRA|=(1<<ADSC);
 	while(ADCSRA&(1<<ADSC));
 	return (ADC);
 }
 
-void analogWrite(uint8_t pInNo,uint8_t dUtycY)
+void analogWrite(uint8_t pInno,uint8_t dUtycY)
 {
   TCCR1B=(1<<CS11)|(1<<CS10);
   TCCR1A=(1<<WGM10)|(1<<WGM12)|(1<<COM1A1)|(1<<COM1B1);
-	if(pInNo==1)
+	if((pInno%8)==1)
 	{
 	  OCR1A=dUtycY;
 	}
-	if(pInNo==2)
+	if((pInno%8)==2)
 	{
           OCR1B=dUtycY;
 	}
@@ -739,14 +1120,7 @@ ISR(INT7_vect)
     cAllisr();
 }
 
-
-int main(){
-	void setup();
-	while(1){
-		void loop();
-	}
-}
-void softwareInterrupt(void(*iSrfun)(void))
+/*void softwareInterrupt(void (*iSrfun(void)))
 {
 	uSerfun=iSrfun;
         TCCR1A|=(1<<WGM11);
@@ -758,3 +1132,4 @@ ISR(TIMER1_OVF_vect)
 {
 	uSerfun(); 
 }
+*/
