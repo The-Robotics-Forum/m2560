@@ -7,20 +7,22 @@
  |		    #       #     #     #		              |
  |		    #       #       #   #		              |
  *******************************************************/
+/*
+TODO: Add Toggle Mode in pinMode and digitalWrite function
+*/
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
-
 #include <avr/pgmspace.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #ifndef F_CPU
-#define F_CPU 8000000UL   //SET CPU CLOCK
+#define F_CPU 16000000UL   //SET CPU CLOCK
 #define FOSC 16000000
 #endif
 #include <util/delay.h>
-
+/**************************************************************************************************************************/
 const uint8_t OUTPUT=1,INPUT=0;
 const uint8_t HIGH=1,LOW=0;
 const uint8_t RISING=2,FALLING=3,CHANGE=4;      
@@ -59,107 +61,100 @@ void loop(void);
 void pinMode(uint8_t pInno,uint8_t mOde)
 {
 	int l;
-  if(mOde==0)
-        { 
-        	switch(d[pInno])
+  	if(mOde==0)
+    { 
+    	switch(d[pInno]){
+ 
+          	case'b':
+                  DDRB&=~(1<<c[pInno]);
+		           break;
+          	case'c':
+                 DDRC&=~(1<<c[pInno]);
+		          break;
+          	case'd':
+                 DDRD&=~(1<<c[pInno]);
+		          break;
+	      	case'e':
+                  DDRE&=~(1<<c[pInno]);
+		           break;
+		    case'g':
+                  DDRG&=~(1<<c[pInno]);
+		           break;
+			case'h':
+                  DDRH&=~(1<<c[pInno]);
+				  break;
+		    case'j':
+                  DDRJ&=~(1<<c[pInno]);
+		          break;
+			case'l':
+                  DDRL&=~(1<<c[pInno]);
+		          break;	        		   		   	  	  		 		 			 
+     	}  
+	}
+	else{          
+			switch(d[pInno])
          	{
 	 
-	          case'b':
-	                  DDRB|=(0<<c[pInno]);
-			           break;
-	          case'c':
-	                 DDRC|=(0<<c[pInno]);
-			          break;
-	          case'd':
-	                 DDRD|=(0<<c[pInno]);
-			          break;
-				//case'h':
-				  //  DDRH|(0<<c[pInno]);
-		      case'e':
-	                  DDRE|=(0<<c[pInno]);
-			           break;
-
-			     case'g':
-	                  DDRG|=(0<<c[pInno]);
-			           break;
-			 case'h':
-	                  DDRH|=(0<<c[pInno]);
-					  		           break;
-		     
-			     case'j':
-	                  DDRJ|=(0<<c[pInno]);
-			           break;
-				     case'l':
-	                  DDRL|=(0<<c[pInno]);
-			           break;	        		   		   	  	  		 		 			 
-	     }  }
-	else{          switch(d[pInno])
-         {
-	 
-	          case'b':
-	                  DDRB|=(1<<c[pInno]);
-			           break;
-	          case'c':
-	                 DDRC|=(1<<c[pInno]);
-			          break;
-	          case'd':
-	                 DDRD|=(1<<c[pInno]);
-			          break;
-					 
-				    
-		      case'e':
-	                  DDRE|=(1<<c[pInno]);
-			           break;
-
-			     case'g':
-	                  DDRG|=(1<<c[pInno]);
-			           break;
-			 case'h':
-	                  DDRH|=(1<<c[pInno]);
-			           break;
-			     case'j':
-	                  DDRJ|=(1<<c[pInno]);
-			           break;
-				     case'l':
-	                  DDRL|=(1<<c[pInno]);
-			           break;	  		 		 			 
+	        	case'b':
+	            	DDRB|=(1<<c[pInno]);
+			    	break;
+	          	case'c':
+	                DDRC|=(1<<c[pInno]);
+			        break;
+	          	case'd':
+	                DDRD|=(1<<c[pInno]);
+			        break;
+		      	case'e':
+	                DDRE|=(1<<c[pInno]);
+			        break;
+			    case'g':
+	                DDRG|=(1<<c[pInno]);
+			        break;
+			 	case'h':
+	                DDRH|=(1<<c[pInno]);
+			        break;
+			    case'j':
+	                DDRJ|=(1<<c[pInno]);
+			        break;
+				case'l':
+	                DDRL|=(1<<c[pInno]);
+			        break;	  		 		 			 
 	     }  
 	}
 }
 
 void digitalWrite (uint8_t pInno ,uint8_t mOde)		 
-
 {
    if(mOde==0)
         { switch(d[pInno])
          {
 	 
 	          case'b':
-	                  PORTB|=(0<<c[pInno]);
+	                  PORTB&=~(1<<c[pInno]);
 			           break;
 	          case'c':
-	                 PORTC|=(0<<c[pInno]);
+	                 PORTB&=~(1<<c[pInno]);
 			          break;
 	          case'd':
-	                 PORTD|=(0<<c[pInno]);
+	                 PORTD&=~(1<<c[pInno]);
 			          break;
 				
 		      case'e':
-	                  PORTE|=(0<<c[pInno]);
+	                  PORTE&=~(1<<c[pInno]);
 			           break;
 
 			     case'g':
-	                  PORTG|=(0<<c[pInno]);
+	                  PORTG&=~(1<<c[pInno]);
 			           break;
 			 case'h':
-	                  PORTH|=(0<<c[pInno]);
+	                  PORTH&=~(1<<c[pInno]);
 			           break;
 		     
 			     case'j':
-	                  PORTJ|=(0<<c[pInno]);
+	                  PORTJ&=~(1<<c[pInno]);
 			           break;
 				     case'l':
-	                  PORTL|=(0<<c[pInno]);
+	                  PORTL&=~(1<<c[pInno]);
 			           break;	        		   		   	  	  		 		 			 
 	     }  }
 	else{          switch(d[pInno])
@@ -924,3 +919,10 @@ ISR(TIMER1_OVF_vect)
 	uSerfun(); 
 }
 */
+
+int main(){
+	void setup();
+	while(1){
+		void loop();
+	}
+}
