@@ -16,7 +16,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #ifndef F_CPU
-#define F_CPU 16000000UL   //SET CPU CLOCK
+#define F_CPU 8000000UL   //SET CPU CLOCK
 #define FOSC 16000000
 #endif
 #include <util/delay.h>
