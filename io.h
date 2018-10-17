@@ -488,7 +488,7 @@ case 'l':
 class Serial
 {
 	public:
-	void start( unsigned int BAUD){
+	void begin( unsigned int BAUD){
 		/*Set baud rate */int uBrr;
 		uBrr=FOSC/16/BAUD-1;
 		UBRR0H = (unsigned char)(uBrr>>8);
@@ -497,7 +497,7 @@ class Serial
 		UCSR0B = (1<<RXEN0)|(1<<TXEN0);
 	}
 	/* Set frame format: 8data, 2stop bit */
-	void send( unsigned char data ){
+	void write( unsigned char data ){
 		/* Wait for empty transmit buffer */
 		while ( !( UCSR0A & (1<<UDRE0)) )
 		;
@@ -505,7 +505,7 @@ class Serial
 		UDR0 = data;
 		_delay_ms(100);
 	}
-	unsigned char get( void ){
+	unsigned char read( void ){
 		/* Wait for data to be received */
 		while ( !(UCSR0A & (1<<RXC0)) )
 		;
