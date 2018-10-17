@@ -1,9 +1,11 @@
 
 class Servo{
 public:
-  void attach(uint8_t num)       //F_CPU=clock frequency and num=pin no.to be attached
+  uint8_t pIn;
+  void attach(uint8_t nUm)       //F_CPU=clock frequency and num=pin no.to be attached
   {
-    switch(num)
+    pIn=nUm;
+    switch(pIn)
     {
      case 11 :                            //OC1A
         DDRB|=(1<<PB5); // PORTB as OUTPUT
@@ -86,59 +88,59 @@ public:
      }
   }
 
-  void write(short int pin,int val)           //PIN=servo pin no. on mega,val=angle F_CPU for the servo at pin
+  void write(int vAl)           //PIN=servo pin no. on mega,vAl=angle F_CPU for the servo at pin
   {
-    switch(pin)
+    switch(pIn)
     {
      case 11:
-        val=map(val,0,180,ICR1/40,ICR1/8);
-        OCR1A=ICR1-val;
+        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        OCR1A=ICR1-vAl;
         break;
       case 12:
-        val=map(val,0,180,ICR1/40,ICR1/8);
-        OCR1B=ICR1-val;
+        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        OCR1B=ICR1-vAl;
         break;
       case 5:
-        val=map(val,0,180,ICR1/40,ICR1/8);
-        OCR3A=ICR3-val;
+        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        OCR3A=ICR3-vAl;
         break;
       case 2:
-        val=map(val,0,180,ICR1/40,ICR1/8);
-        OCR3B=ICR3-val;
+        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        OCR3B=ICR3-vAl;
         break;
       case 3:
-        val=map(val,0,180,ICR1/40,ICR1/8);
-        OCR3C=ICR3-val;
+        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        OCR3C=ICR3-vAl;
         break;
       case 6:
-        val=map(val,0,180,ICR1/40,ICR1/8);
-        OCR4A=ICR4-val;
+        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        OCR4A=ICR4-vAl;
         break;
       case 7:
-        val=map(val,0,180,ICR1/40,ICR1/8);
-        OCR4B=ICR4-val;
+        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        OCR4B=ICR4-vAl;
         break; 
       case 8:
-        val=map(val,0,180,ICR1/40,ICR1/8);
-        OCR4C=ICR4-val;
+        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        OCR4C=ICR4-vAl;
         break;
       case 46:
-        val=map(val,0,180,ICR1/40,ICR1/8);
-        OCR5A=ICR5-val;
+        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        OCR5A=ICR5-vAl;
         break;
       case 45:
-        val=map(val,0,180,ICR1/40,ICR1/8);
-        OCR5B=ICR5-val;
+        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        OCR5B=ICR5-vAl;
         break;
       case 44:
-        val=map(val,0,180,ICR1/40,ICR1/8);
-        OCR5C=ICR5-val;
+        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        OCR5C=ICR5-vAl;
         break;
       default :
         break;
     }
-    //val = map(val,0,180,125,625);             //mapping one to one F_CPUs
-    //OCR1A= ICR1-val;                              //GENERATING PULSE IN INVERTED MODE
+    //vAl = map(vAl,0,180,125,625);             //mapping one to one F_CPUs
+    //OCR1A= ICR1-vAl;                              //GENERATING PULSE IN INVERTED MODE
    //_delay_ms(500);                              //give delay in the main code
   }
 
