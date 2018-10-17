@@ -323,7 +323,8 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
 }
 
 unsigned long pulseIn(volatile uint8_t pInno, uint8_t vAlue)
-{ char x;
+{ 
+	char x;
   TCCR2A = (1 << WGM21) | (1 << COM2A1) | (1 << FOC2A) | (0 << COM2A0) | (0 << WGM20); //initializing in CTC mode
   TCCR2A = (1 << CS20);
   unsigned long mAxloops = 500000;
@@ -337,13 +338,13 @@ unsigned long pulseIn(volatile uint8_t pInno, uint8_t vAlue)
 		            return 0;
 	                }
              // wait for the pulse to start  
-              while (((PINB) && (c[pInno]))) != vAlue)
+              while (((PINB) && (c[pInno])) != vAlue)
 	              {
 		     if (--mAxloops == 0) 
 		          return 0;
 	           }
             // wait for the pulse to stop
-             while (((PINB) && (c[pInno]))) == vAlue)
+             while (((PINB) && (c[pInno])) == vAlue)
 	                   {
 	               	if (++wIdth == mAxloops)
 		          return 0;
@@ -351,19 +352,19 @@ unsigned long pulseIn(volatile uint8_t pInno, uint8_t vAlue)
               return wIdth;
                     }  break;
  case'c':
-	                 { while (((PINC) && (c[pInno]))) == vAlue)
+	                 { while (((PINC) && (c[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
   // wait for the pulse to start  
-                  while (((PINC) && (c[pInno]))) != vAlue)
+                  while (((PINC) && (c[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
 		                 return 0;
 	                      }
   // wait for the pulse to stop
-                while (((PINC) && (c[pInno]))) == vAlue)
+                while (((PINC) && (c[pInno])) == vAlue)
 	                 {
                  		if (++wIdth == mAxloops)
                   		return 0;
@@ -373,19 +374,19 @@ unsigned long pulseIn(volatile uint8_t pInno, uint8_t vAlue)
 						 
 	 case'd':
 	     
-	                 { while (((PIND) && (c[pInno]))) == vAlue)
+	                 { while (((PIND) && (c[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
   // wait for the pulse to start  
-                  while (((PIND) && (c[pInno]))) != vAlue)
+                  while (((PIND) && (c[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
 		                 return 0;
 	                      }
   // wait for the pulse to stop
-                while (((PIND) && (c[pInno]))) == vAlue)
+                while (((PIND) && (c[pInno])) == vAlue)
 	                 {
                  		if (++wIdth == mAxloops)
                   		return 0;
@@ -395,19 +396,19 @@ unsigned long pulseIn(volatile uint8_t pInno, uint8_t vAlue)
 				  //  DDRH|(0<<c[pInno]);
 	case'e':
 	                  
-	                 { while (((PINE) && (c[pInno]))) == vAlue)
+	                 { while (((PINE) && (c[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
   // wait for the pulse to start  
-                  while (((PINE) && (c[pInno]))) != vAlue)
+                  while (((PINE) && (c[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
 		                 return 0;
 	                      }
   // wait for the pulse to stop
-                while (((PINE) && (c[pInno]))) == vAlue)
+                while (((PINE) && (c[pInno])) == vAlue)
 	                 {
                  		if (++wIdth == mAxloops)
                   		return 0;
@@ -417,13 +418,13 @@ unsigned long pulseIn(volatile uint8_t pInno, uint8_t vAlue)
 	                  
 case'h':
 	                 
-	                 { while (((PINH) &&(c[pInno]))) == vAlue)
+	                 { while (((PINH) &&(c[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
   // wait for the pulse to start  
-                  while (((PINH) && (c[pInno]))) != vAlue)
+                  while (((PINH) && (c[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
 		                 return 0;
@@ -438,19 +439,19 @@ case'h':
                          } break;  
 case'j':
 	                  
-	                 { while (((PINJ) && (c[pInno]))) == vAlue)
+	                 { while (((PINJ) && (c[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
   // wait for the pulse to start  
-                  while (((PINJ) && (c[pInno]))) != vAlue)
+                  while (((PINJ) && (c[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
 		                 return 0;
 	                      }
   // wait for the pulse to stop
-                while (((PINJ) && (c[pInno]))) == vAlue)
+                while (((PINJ) && (c[pInno])) == vAlue)
 	                 {
                  		if (++wIdth == mAxloops)
                   		return 0;
@@ -460,19 +461,19 @@ case'j':
 			           break;
 case 'l':
 	                  
-	                 { while (((PINL) && (c[pInno]))) == vAlue)
+	                 { while (((PINL) && (c[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
   // wait for the pulse to start  
-                  while (((PINL) && (c[pInno]))) != vAlue)
+                  while (((PINL) && (c[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
 		                 return 0;
 	                      }
   // wait for the pulse to stop
-                while (((PINL) && (c[pInno]))) == vAlue)
+                while (((PINL) && (c[pInno])) == vAlue)
 	                 {
                  		if (++wIdth == mAxloops)
                   		return 0;
