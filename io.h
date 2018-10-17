@@ -36,7 +36,7 @@ TODO: Add Toggle Mode in pinMode and digitalWrite function
 const uint8_t OUTPUT=1,INPUT=0;
 const uint8_t HIGH=1,LOW=0;
 const uint8_t RISING=2,FALLING=3,CHANGE=4;      
-
+float mIlli;
 //pinMapping
 int c[60]={0,1,4,5,5,3,3,4,5,6,4,5,6,7,1,0,1,0,3,2,1,0,6,7,0,1,2,3,4,5,6,7,7,6,5,4,3,2,1,0,7,2,1,0,7,6,5,4,3,2,1,0,3,2,1,0};
 
@@ -674,11 +674,10 @@ void analogWrite(uint8_t pInno,uint8_t dUtycY)
 	}
 }
 
-float x=0;
 int millis()
 {
 	float l;
-	l=x*0.16+0.00000625*TCNT0;
+	l=mIlli*0.16+0.00000625*TCNT0;
         return l;
 }
 
@@ -693,7 +692,7 @@ void tinit(void)
 
 ISR(TIMER0_OVF_vect)
 {
-	x++;	
+	mIlli++;	
 }	
 
 void delay(unsigned long mIllisec)
@@ -930,7 +929,10 @@ ISR(TIMER1_OVF_vect)
 	uSerfun(); 
 }
 */
-
+Serial Serial;
+Serial1 Serial1;
+Serial2 Serial2;
+Serial3 Serial3;
 int main(){
 	setup();
 	while(1){
