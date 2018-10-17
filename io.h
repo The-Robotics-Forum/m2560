@@ -7,6 +7,16 @@
  |		    #       #     #     #		              |
  |		    #       #       #   #		              |
  *******************************************************/
+/*************INDEX******************
+*BUG – a known bug that should be corrected.
+*FIXME – should be corrected.
+*HACK – a workaround.
+*TODO – something to be done.
+*UNDONE – a reversal or "roll back" of previous code.
+*XXX – warn other programmers of problematic or misguiding code
+*/
+
+
 /*
 TODO: Add Toggle Mode in pinMode and digitalWrite function
 */
@@ -231,7 +241,7 @@ uint8_t digitalRead(int pInno)
 					   return z;	        		   		   	  	  		 		 			 
 	     }  
 }
-
+//FIXM
 /*static void turnOffPWM(uint8_t tImer)
 {
 	switch (tImer)
@@ -921,8 +931,8 @@ ISR(TIMER1_OVF_vect)
 */
 
 int main(){
-	void setup();
+	setup();
 	while(1){
-		void loop();
+		loop();
 	}
 }
