@@ -67,8 +67,7 @@ void servoattach(short int num,int value)       //value=clock frequency and num=
       ICR5=312.5*value-1;                    //generating 20msec pulse (pwm method)
       break;
 
-    case 45 :                           //OC5B
-      DDRL|=(1<<PL4); // PORTB as OUTPUT
+    case 45 :                           //OC5B      DDRL|=(1<<PL4); // PORTB as OUTPUT
       TCCR5A|=(1<<WGM51)|(1<<COM5B1)|(1<<COM5B0);  //SETTING PRESCALAR AS 64 
       TCCR5B|=(1<<WGM52)|(1<<WGM53)|(1<<CS50)|(1<<CS51); //FAST PWM MODE
       ICR5=312.5*value-1;                    //generating 20msec pulse (pwm met)
@@ -91,7 +90,7 @@ void servoPSPwrite(short int pin,int val)           //PIN=servo pin no. on mega,
   switch(pin)
   {
    case 11:
-      val=map(val,0,180s,ICR1/40,ICR1/8);
+      val=map(val,0,180,ICR1/40,ICR1/8);
       OCR1A=ICR1-val;
       break;
     case 12:
