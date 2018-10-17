@@ -29,7 +29,6 @@ TODO: Add Toggle Mode in pinMode and digitalWrite function
 #include <avr/interrupt.h>
 #ifndef F_CPU
 #define F_CPU 16000000UL   //SET CPU CLOCK
-#define FOSC 16000000
 #endif
 #include <util/delay.h>
 /**************************************************************************************************************************/
@@ -490,19 +489,18 @@ class Serial
 	public:
 	void begin( unsigned int BAUD){
 		/*Set baud rate */int uBrr;
-		uBrr=FOSC/16/BAUD-1;
+		uBrr=(F_CPU/16UL/BAUD-1);
 		UBRR0H = (unsigned char)(uBrr>>8);
 		UBRR0L = (unsigned char)uBrr;
 		/*Enable receiver and transmitter */
 		UCSR0B = (1<<RXEN0)|(1<<TXEN0);
 	}
 	/* Set frame format: 8data, 2stop bit */
-	void write( unsigned char data ){
+	void write( unsigned char dAta ){
 		/* Wait for empty transmit buffer */
-		while ( !( UCSR0A & (1<<UDRE0)) )
-		;
+		while ((UCSR0A & (1<<UDRE0))==0);
 		/* Put data into buffer, sends the data */
-		UDR0 = data;
+		UDR0 = dAta;
 		_delay_ms(100);
 	}
 	unsigned char read( void ){
@@ -529,7 +527,7 @@ class Serial1
 	public:
 	void start( unsigned int BAUD){
 int uBrr;		/*Set baud rate */
-		uBrr=FOSC/16/BAUD-1;
+		uBrr=F_CPU/16/BAUD-1;
 		UBRR1H = (unsigned char)(uBrr>>8);
 		UBRR1L = (unsigned char)uBrr;
 		/*Enable receiver and transmitter */
@@ -569,7 +567,7 @@ class Serial2
 	void start( unsigned int BAUD){
 		/*Set baud rate */
 int uBrr;	  
-		uBrr=(FOSC/16/BAUD-1);
+		uBrr=(F_CPU/16/BAUD-1);
 		UBRR2H = (unsigned char)(uBrr>>8);
 		UBRR2L = (unsigned char)uBrr;
 		/*Enable receiver and transmitter */
@@ -608,7 +606,7 @@ class Serial3
 	public:
 	void start( unsigned int BAUD){
 		int uBrr;/*Set baud rate */
-		  uBrr=(FOSC/16/BAUD-1);
+		  uBrr=(F_CPU/16/BAUD-1);
 		UBRR3H = (unsigned char)(uBrr>>8);
 		UBRR3L = (unsigned char)uBrr;
 		/*Enable receiver and transmitter */
