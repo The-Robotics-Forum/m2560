@@ -58,7 +58,7 @@ void (*uSerfun(void));
 void pinMode(uint8_t , uint8_t );
 static void turnOffPWM(uint8_t );
 void digitalWrite(uint8_t , uint8_t );
-int digitalRead(uint8_t );
+uint8_t digitalRead(uint8_t );
 long unsigned int microsecondsToInches(long unsigned int);
 long unsigned int microsecondsToCentimeters(long unsigned int);
 void setup(void);
@@ -881,10 +881,10 @@ void attachIntterupt(int pIn, void (*iSrfunc)(void), int cOmpare)		//cOmpare:LOW
 	        default:EICRA|=(0<<ISC01)|(0<<ISC00);
 	}
 }
-ISR(INT0_vect)
+/*ISR(INT0_vect)
 {
    cAllisr();
-}
+}*/
 ISR(INT1_vect)
 {
    cAllisr();
