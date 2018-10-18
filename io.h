@@ -663,18 +663,76 @@ int analogRead(int (pInno))
 
 void analogWrite(uint8_t pInno,uint8_t dUtycY)
 {
-  TCCR1B=(1<<CS11)|(1<<CS10);
-  TCCR1A=(1<<WGM10)|(1<<WGM12)|(1<<COM1A1)|(1<<COM1B1);
-	if((pInno%8)==1)
-	{
-	  OCR1A=dUtycY;
-	}
-	if((pInno%8)==2)
-	{
-          OCR1B=dUtycY;
-	}
-}
-
+  
+  
+  switch(pInno)
+  {
+	  case 11:
+		   TCCR1A=(1<<WGM10)|(1<<WGM12)|(1<<COM1A1);
+		   TCCR1B=(1<<CS11)|(1<<CS10);
+		   OCR1A=dUtycY;
+		   break;
+	  case 12:
+		  TCCR1A=(1<<WGM10)|(1<<WGM12)|(1<<COM1B1);
+		  TCCR1B=(1<<CS11)|(1<<CS10);
+		  OCR1B=dUtycY;
+		  break;
+	  case 10:
+		  TCCR2A=(1<<COM2A1)|(1<<COM2A0)|(1<<WGM21)|(1<<WGM20);
+		  TCCR2B=(1<<CS20);
+		  OCR2A=dUtycY;
+		  break;
+	  case 9:
+		   TCCR2A=(1<<WGM21)|(1<<WGM20)|(1<<COM2B1)|(1<<COM2B0);
+		   TCCR2B=(1<<CS20);
+		   OCR2B=dUtycY;
+		   break;
+	  case 5:
+		  TCCR3A=(1<<WGM32)|(1<<WGM30)|(1<<COM3A1)|(1<<COM3A0);
+		  TCCR3B=(1<<CS30);
+		  OCR3A=dUtycY;
+		  break;
+	  case 2:
+		  TCCR3A=(1<<WGM32)|(1<<WGM30)|(1<<COM3B1)|(1<<COM3B0);
+		  TCCR3B=(1<<CS30);
+		  OCR3B=dUtycY;
+		  break;
+	  case 46:
+		  TCCR5A=(1<<WGM52)|(1<<WGM50)|(1<<COM5A1)|(1<<COM5A0);
+		  TCCR5B=(1<<CS50);
+		  OCR5A=dUtycY;
+		  break;
+	  case 45:
+		  TCCR5A=(1<<WGM52)|(1<<WGM50)|(1<<COM5B1)|(1<<COM5B0);
+		  TCCR5B=(1<<CS50);
+		  OCR5B=dUtycY;
+		  break;
+	  case 13:
+		  TCCR0A=(1<<WGM10)|(1<<WGM00)|(1<<COM0A1)|(1<<COM0A0);
+		  TCCR0B=(1<<CS00);
+		  OCR0A=dUtycY;
+		  break;
+	  case 4:
+		  TCCR0A=(1<<WGM10)|(1<<WGM00)|(1<<COM0B1)|(1<<COM0B0);
+		  TCCR0B=(1<<CS00);
+		  OCR0B=dUtycY;
+		  break;
+		  
+	  case 6:
+		  TCCR4A=(1<<WGM42)|(1<<WGM40)|(1<<COM4A1)|(1<<COM4A0);
+		  TCCR4B=(1<<CS40);
+		  OCR4A=dUtycY;
+		  break;
+	  case 7:
+		  TCCR4A=(1<<WGM42)|(1<<WGM40)|(1<<COM4B1)|(1<<COM4B0);
+		  TCCR4B=(1<<CS40);
+		  OCR4B=dUtycY;
+		  break;
+		  
+	  default:
+		  #warning No such PWM pin.
+		  
+  }
 unsigned long millis ()
 {
     unsigned long millis_return;
