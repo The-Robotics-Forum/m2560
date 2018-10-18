@@ -732,10 +732,10 @@ void analogWrite(uint8_t pInno,uint8_t dUtycY)
 		  OCR4B=dUtycY;
 		  break;
 		  
-	  default:
-		  #warning No such PWM pin.
-		  
+	  //default:
+		  //#warning No such PWM pin. ;  
   }
+}
 unsigned long millis ()
 {
     unsigned long millis_return;
