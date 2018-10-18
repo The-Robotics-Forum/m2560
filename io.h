@@ -27,15 +27,17 @@ TODO: Add Toggle Mode in pinMode and digitalWrite function
 #include <avr/pgmspace.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/atomic.h>
 #ifndef F_CPU
 #define F_CPU 16000000UL   //SET CPU CLOCK
 #endif
 #include <util/delay.h>
+#define CTC_MATCH_OVERFLOW ((F_CPU / 1000) / 8)
 /**************************************************************************************************************************/
 const uint8_t OUTPUT=1,INPUT=0;
 const uint8_t HIGH=1,LOW=0;
 const uint8_t RISING=2,FALLING=3,CHANGE=4;      
-float mIlli;
+volatile unsigned long tImer1_millis;
 //pinMapping
 int c[60]={0,1,4,5,5,3,3,4,5,6,4,5,6,7,1,0,1,0,3,2,1,0,6,7,0,1,2,3,4,5,6,7,7,6,5,4,3,2,1,0,7,2,1,0,7,6,5,4,3,2,1,0,3,2,1,0};
 
@@ -52,6 +54,7 @@ void delayMicroseconds(long unsigned);
 double map(double,double,double,double,double);
 double constrain(double,double,double);
 void attachIntterupt(int, void *,int);
+unsigned long millis();
 void (*cAllisr)(void); //function pointer used in ISR()
 void softwareInterrupt(void *);
 void (*uSerfun(void));
@@ -203,7 +206,7 @@ void digitalWrite (uint8_t pInno ,uint8_t mOde)
 		 }
 		 
 
-uint8_t digitalRead(int pInno)
+uint8_t digitalRead(uint8_t pInno)
 {  
 	uint8_t z;				//not a good practice
 	uint8_t x;				//not a good practice
@@ -480,8 +483,8 @@ case 'l':
                      return wIdth;
                          }  
 			           break;	        		   		   	  	  		 		 			 
-	     }  
-					 }					 	
+	     			}  
+	}					 	
 
 
 class Serial
@@ -672,26 +675,39 @@ void analogWrite(uint8_t pInno,uint8_t dUtycY)
 	}
 }
 
-int millis()
+unsigned long millis ()
 {
-	float l;
-	l=mIlli*0.16+0.00000625*TCNT0;
-        return l;
+    unsigned long millis_return;
+
+    // Ensure this cannot be disrupted
+    ATOMIC_BLOCK(ATOMIC_FORCEON) {
+        millis_return = tImer1_millis;
+    }
+ 
+    return millis_return;
 }
 
-void tinit(void)
+ISR (TIMER1_COMPA_vect)
+{
+    tImer1_millis++;
+}
+
+void tinit()
 { 
-	TCCR0A|=(1<<WGM01);
-        TCCR0A|=(1<<CS00);
-	TIMSK0|=(1<<TOV0);
-        TCNT0=0;
+	TCCR1B |= (1 << WGM12) | (1 << CS11);
+ 
+    // Load the high byte, then the low byte
+    // into the output compare
+    OCR1AH = (CTC_MATCH_OVERFLOW >> 8);
+    OCR1AL = CTC_MATCH_OVERFLOW;
+ 
+    // Enable the compare match interrupt
+    TIMSK1 |= (1 << OCIE1A);
+
+    // Now enable global interrupts
+    sei();
 }
-
-
-ISR(TIMER0_OVF_vect)
-{
-	mIlli++;	
-}	
+	
 
 void delay(unsigned long mIllisec)
 {
@@ -881,10 +897,10 @@ void attachIntterupt(int pIn, void (*iSrfunc)(void), int cOmpare)		//cOmpare:LOW
 	        default:EICRA|=(0<<ISC01)|(0<<ISC00);
 	}
 }
-/*ISR(INT0_vect)
+ISR(INT0_vect)
 {
    cAllisr();
-}*/
+}
 ISR(INT1_vect)
 {
    cAllisr();
@@ -932,6 +948,7 @@ Serial1 Serial1;
 Serial2 Serial2;
 Serial3 Serial3;
 int main(){
+	tinit();
 	setup();
 	while(1){
 		loop();
