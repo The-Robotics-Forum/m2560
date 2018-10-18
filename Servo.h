@@ -93,7 +93,7 @@ public:
     switch(pIn)
     {
      case 11:
-        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        vAl=map(vAl,0,270,ICR1/40,ICR1/8);
         OCR1A=ICR1-vAl;
         break;
       case 12:
