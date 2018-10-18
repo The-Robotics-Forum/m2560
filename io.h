@@ -525,8 +525,13 @@ class Serial
 		flush();
 		UCSR0B&=0xe7;	//disabling RXEN & TXEN
 	}
+	uint8_t available(void){	//working fine
+		 if((UCSR0A & (1<<RXC0)))
+			return 1;				
+ 		else		
+			return 0;				
+	}};
 
-};
 
 class Serial1
 {
@@ -565,8 +570,12 @@ class Serial1
 		flush();
 		UCSR1B&=0xe7;	//disabling RXEN & TXEN
 	}
-
-};
+		uint8_t available(void){	//working fine
+		 if((UCSR1A & (1<<RXC1)))
+			return 1;				
+ 		else		
+			return 0;				
+	}};
 class Serial2
 {
 	public:
@@ -605,8 +614,13 @@ class Serial2
 		flush();
 		UCSR2B&=0xe7;	//disabling RXEN & TXEN
 	}
+		uint8_t available(void){	//working fine
+		 if((UCSR2A & (1<<RXC2)))
+			return 1;				
+ 		else		
+			return 0;				}
+			};
 
-};
 class Serial3
 {
 	public:
@@ -644,8 +658,12 @@ class Serial3
 		flush();
 		UCSR3B&=0xe7;	//disabling RXEN & TXEN
 	}
-
-};
+		uint8_t available(void){	//working fine
+		 if((UCSR3A & (1<<RXC3)))
+			return 1;				
+ 		else		
+			return 0;				
+	}};
 void initADC()
 {
 	ADMUX=(1<<REFS0);				//Aref=AVcc
@@ -732,10 +750,9 @@ void analogWrite(uint8_t pInno,uint8_t dUtycY)
 		  OCR4B=dUtycY;
 		  break;
 		  
-	  //default:
-		  //#warning No such PWM pin. ;  
+		  
   }
-}
+}  
 unsigned long millis ()
 {
     unsigned long millis_return;
@@ -1004,14 +1021,3 @@ ISR(TIMER1_OVF_vect)
 	uSerfun(); 
 }
 */
-Serial Serial;
-Serial1 Serial1;
-Serial2 Serial2;
-Serial3 Serial3;
-int main(){
-	tinit();
-	setup();
-	while(1){
-		loop();
-	}
-}
