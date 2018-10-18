@@ -528,16 +528,16 @@ class Serial
 class Serial1
 {
 	public:
-	void start( unsigned int BAUD){
-int uBrr;		/*Set baud rate */
-		uBrr=F_CPU/16/BAUD-1;
+	void begin( unsigned int BAUD){
+		int uBrr;		/*Set baud rate */
+		uBrr=(F_CPU/16/BAUD-1);
 		UBRR1H = (unsigned char)(uBrr>>8);
 		UBRR1L = (unsigned char)uBrr;
 		/*Enable receiver and transmitter */
 		UCSR1B = (1<<RXEN1)|(1<<TXEN1);
 	}
 	/* Set frame format: 8data, 2stop bit */
-	void send( unsigned char data ){
+	void write( unsigned char data ){
 		/* Wait for empty transmit buffer */
 		while ( !( UCSR1A & (1<<UDRE1)) )
 		;
@@ -545,7 +545,7 @@ int uBrr;		/*Set baud rate */
 		UDR1= data;
 		_delay_ms(100);
 	}
-	unsigned char get( void ){
+	unsigned char read( void ){
 		/* Wait for data to be received */
 		while ( !(UCSR1A & (1<<RXC1)) )
 		;
@@ -567,9 +567,9 @@ int uBrr;		/*Set baud rate */
 class Serial2
 {
 	public:
-	void start( unsigned int BAUD){
+	void begin( unsigned int BAUD){
 		/*Set baud rate */
-int uBrr;	  
+		int uBrr;	  
 		uBrr=(F_CPU/16/BAUD-1);
 		UBRR2H = (unsigned char)(uBrr>>8);
 		UBRR2L = (unsigned char)uBrr;
@@ -577,15 +577,15 @@ int uBrr;
 		UCSR2B = (1<<RXEN2)|(1<<TXEN2);
 	}
 	/* Set frame format: 8data, 2stop bit */
-	void send( unsigned char data ){
+	void write( unsigned char dAta ){
 		/* Wait for empty transmit buffer */
 		while ( !( UCSR2A & (1<<UDRE2)) )
 		;
 		/* Put data into buffer, sends the data */
-		UDR2= data;
+		UDR2= dAta;
 		_delay_ms(100);
 	}
-	unsigned char get( void ){
+	unsigned char read(){
 		/* Wait for data to be received */
 		while ( !(UCSR2A & (1<<RXC2)) )
 		;
