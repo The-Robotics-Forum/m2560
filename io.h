@@ -20,6 +20,7 @@
 /*
 TODO: Add Toggle Mode in pinMode and digitalWrite function
 */
+#include <avr/io.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
@@ -495,8 +496,10 @@ class Serial
 		uBrr=(F_CPU/16UL/BAUD-1);
 		UBRR0H = (unsigned char)(uBrr>>8);
 		UBRR0L = (unsigned char)uBrr;
-		/*Enable receiver and transmitter */
+		/* Enable receiver and transmitter */
 		UCSR0B = (1<<RXEN0)|(1<<TXEN0);
+		/* Set frame format: 8data, 2stop bit */
+		UCSR0C = (1<<USBS0)|(3<<UCSZ00);
 	}
 	/* Set frame format: 8data, 2stop bit */
 	void write( unsigned char dAta ){
