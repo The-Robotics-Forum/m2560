@@ -52,8 +52,8 @@ void analogWrite(uint8_t ,uint8_t);
 int analogRead(uint8_t);
 void delay(unsigned long);
 void delayMicroseconds(long unsigned);
-double map(double,double,double,double,double);
-double constrain(double,double,double);
+long map(long, long, long, long, long);
+long constrain(long, long, long);
 void attachIntterupt(int, void *,int);
 unsigned long millis();
 void (*cAllisr)(void); //function pointer used in ISR()
@@ -812,19 +812,21 @@ void delayMicroseconds(unsigned long mIcrosec)
 	return;
 }
 
-double map(double vAlue, double fromLow, double fromHigh, double toLow, double toHigh)
+long map(long x, long in_min, long in_max, long out_min, long out_max)
 {
-	return ((vAlue-fromLow)/abs(fromHigh-fromLow)*abs(toHigh+toLow));
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-double constrain(double nUm,double uPper,double lOwer)
+long constrain(long nUm,long uPper,long lOwer)
 {
-	if(nUm<uPper){
-		return uPper;}
-	else if(nUm>lOwer){
-		return lOwer;}
-	else 
-	return nUm;	
+	if(nUm>uPper){
+      return uPper;
+  	}
+    else if(nUm<lOwer){
+      return lOwer;
+  	}
+    else 
+    return nUm; 	
 }
 void attachIntterupt(int pIn, void (*iSrfunc)(void), int cOmpare)		//cOmpare:LOW=0,HIGH1,RISING=2,FALLING=3
 {
