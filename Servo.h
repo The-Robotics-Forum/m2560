@@ -30,7 +30,7 @@ public:
       case 5 :                            //OC3A
         DDRE|=(1<<PE3); // PORTB as OUTPUT
         TCCR3A|=(1<<WGM31)|(1<<COM3A1)|(1<<COM3A0);  //SETTING PRESCALAR AS 64 
-        TCCR3B|=(1<<WGM12)|(1<<WGM13)|(1<<CS30)|(1<<CS31); //FAST PWM MODE
+        TCCR3B|=(1<<WGM32)|(1<<WGM33)|(1<<CS30); //FAST PWM MODE
         ICR3=iCr;                    //generating 20msec pulse (pwm method)
         break;
 
