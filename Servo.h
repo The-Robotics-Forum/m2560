@@ -23,7 +23,7 @@ public:
      case 12 :                            //OC1B
         DDRB|=(1<<PB6); // PORTB as OUTPUT
         TCCR1A|=(1<<WGM11)|(1<<COM1B1)|(1<<COM1B0);  //SETTING PRESCALAR AS 64 
-        TCCR1B|=(1<<WGM12)|(1<<WGM13)|(1<<CS10)|(1<<CS11); //FAST PWM MODE
+        TCCR1B|=(1<<WGM12)|(1<<WGM13)|(1<<CS10); //FAST PWM MODE
         ICR1=iCr;                    //generating 20msec pulse (pwm method)
         break;
 
@@ -96,14 +96,13 @@ public:
 
   void write(int vAl)           //PIN=servo pin no. on mega,vAl=angle F_CPU for the servo at pin
   {
-    vAl=constraint(mapAngle(vAl,0,270,iCr/40,iCr/8.7),iCr/40,iCr/8.7);
+    vAl=constraint(mapAngle(vAl,0,270,iCr/40,iCr/8.7),iCr/40,iCr/8);
     switch(pIn)
     {
      case 11:
         OCR1A=ICR1-vAl;
         break;
       case 12:
-        
         OCR1B=ICR1-vAl;
         break;
       case 5:

@@ -38,7 +38,7 @@ TODO: Add Toggle Mode in pinMode and digitalWrite function
 const uint8_t OUTPUT=1,INPUT=0;
 const uint8_t HIGH=1,LOW=0;
 const uint8_t RISING=2,FALLING=3,CHANGE=4;
-volatile unsigned long tImer1_millis;
+volatile unsigned long tImer2_millis;
 //pinMapping
 int c[60]={0,1,4,5,5,3,3,4,5,6,4,5,6,7,1,0,1,0,3,2,1,0,6,7,0,1,2,3,4,5,6,7,7,6,5,4,3,2,1,0,7,2,1,0,7,6,5,4,3,2,1,0,3,2,1,0};
 
@@ -781,8 +781,7 @@ void tinit()
 
     // Load the high byte, then the low byte
     // into the output compare
-    OCR1AH = (CTC_MATCH_OVERFLOW >> 8);
-    OCR1AL = CTC_MATCH_OVERFLOW;
+    OCR2A = CTC_MATCH_OVERFLOW;
 
     // Enable the compare match interrupt
     TIMSK2 |= (1 << OCIE2A);
@@ -819,7 +818,6 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
 
 long constrain(long nUm,long lOwer,long uPper)
 {
-<<<<<<< HEAD
 	if(nUm>uPper){
       return uPper;
   	}
@@ -827,15 +825,7 @@ long constrain(long nUm,long lOwer,long uPper)
       return lOwer;
   	}
     else 
-    return nUm; 	
-=======
-	if(nUm<uPper){
-		return uPper;}
-	else if(nUm>lOwer){
-		return lOwer;}
-	else
-	return nUm;
->>>>>>> 7cb9a0ed1842f9c54a8765a4451f2f2a2a9ba12a
+    return nUm;
 }
 void attachIntterupt(int pIn, void (*iSrfunc)(void), int cOmpare)		//cOmpare:LOW=0,HIGH1,RISING=2,FALLING=3
 {
