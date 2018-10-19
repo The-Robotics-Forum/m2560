@@ -38,7 +38,7 @@ TODO: Add Toggle Mode in pinMode and digitalWrite function
 const uint8_t OUTPUT=1,INPUT=0;
 const uint8_t HIGH=1,LOW=0;
 const uint8_t RISING=2,FALLING=3,CHANGE=4;
-volatile unsigned long tImer1_millis;
+volatile unsigned long tImer2_millis;
 //pinMapping
 int c[60]={0,1,4,5,5,3,3,4,5,6,4,5,6,7,1,0,1,0,3,2,1,0,6,7,0,1,2,3,4,5,6,7,7,6,5,4,3,2,1,0,7,2,1,0,7,6,5,4,3,2,1,0,3,2,1,0};
 
@@ -826,8 +826,8 @@ long constrain(long nUm,long lOwer,long uPper)
     else if(nUm<lOwer){
       return lOwer;
   	}
-    else 
-    return nUm; 	
+    else
+    return nUm;
 =======
 	if(nUm<uPper){
 		return uPper;}
