@@ -9,9 +9,9 @@ public:
     {
      case 11 :                           //OC1A
         DDRB|=(1<<PB5); // PORTB as OUTPUT
-        TCCR1A|=(1<<WGM11)|(1<<COM1A1)|(1<<COM1A0);  //SETTING PRESCALAR AS 64 
-        TCCR1B|=(1<<WGM12)|(1<<WGM13)|(1<<CS10); //FAST PWM MODE
-        ICR1=20000;                    //generating 20msec pulse (pwm method)
+        TCCR1A|=(1<<WGM11)|(1<<COM1B1)|(1<<COM1B0);  //SETTING PRESCALAR AS 64 
+        TCCR1B|=(1<<WGM12)|(1<<WGM13)|(1<<CS10)|(1<<CS11); //FAST PWM MODE
+        ICR1=(312.5*F_CPU/1000000UL)-1;                    //generating 20msec pulse (pwm method)
         break; 
 
      case 12 :                            //OC1B
@@ -93,48 +93,47 @@ public:
     switch(pIn)
     {
      case 11:
-        //vAl=map(vAl,0,180,100,200);
-        vAl=2000;
-        OCR1A=vAl;
+        vAl=map(vAl,0,240,ICR1/42.5,ICR1/8.6956);
+        OCR1A=ICR1-vAl;
         break;
       case 12:
-        vAl=map(vAl,0,180,ICR1/40,ICR1/8);
+        vAl=map(vAl,0,240,ICR1/42.5,ICR1/8.6956);
         OCR1B=ICR1-vAl;
         break;
       case 5:
-        vAl=map(vAl,0,180,ICR3/40,ICR3/8);
+        vAl=map(vAl,0,240,ICR3/42.5,ICR3/8.6956);
         OCR3A=ICR3-vAl;
         break;
       case 2:
-        vAl=map(vAl,0,180,ICR3/40,ICR3/8);
+        vAl=map(vAl,0,240,ICR3/42.5,ICR3/8.6956);
         OCR3B=ICR3-vAl;
         break;
       case 3:
-        vAl=map(vAl,0,180,ICR3/40,ICR3/8);
+        vAl=map(vAl,0,240,ICR3/42.5,ICR3/8.6956);
         OCR3C=ICR3-vAl;
         break;
       case 6:
-        vAl=map(vAl,0,180,ICR4/40,ICR4/8);
+        vAl=map(vAl,0,240,ICR4/42.5,ICR4/8.6956);
         OCR4A=ICR4-vAl;
         break;
       case 7:
-        vAl=map(vAl,0,180,ICR4/40,ICR4/8);
+        vAl=map(vAl,0,240,ICR4/42.5,ICR4/8.6956);
         OCR4B=ICR4-vAl;
         break; 
       case 8:
-        vAl=map(vAl,0,180,ICR4/40,ICR4/8);
+        vAl=map(vAl,0,240,ICR4/42.5,ICR4/8.6956);
         OCR4C=ICR4-vAl;
         break;
       case 46:
-        vAl=map(vAl,0,180,ICR5/40,ICR5/8);
+        vAl=map(vAl,0,240,ICR5/42.5,ICR5/8.6956);
         OCR5A=ICR5-vAl;
         break;
       case 45:
-        vAl=map(vAl,0,180,ICR5/40,ICR5/8);
+        vAl=map(vAl,0,240,ICR5/42.5,ICR5/8.6956);
         OCR5B=ICR5-vAl;
         break;
       case 44:
-        vAl=map(vAl,0,180,ICR5/40,ICR5/8);
+        vAl=map(vAl,0,240,ICR5/42.5,ICR5/8.6956);
         OCR5C=ICR5-vAl;
         break;
       default :

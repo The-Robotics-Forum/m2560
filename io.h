@@ -30,7 +30,7 @@ TODO: Add Toggle Mode in pinMode and digitalWrite function
 #include <avr/interrupt.h>
 #include <util/atomic.h>
 #ifndef F_CPU
-#define F_CPU 16000000UL   //SET CPU CLOCK
+#define F_CPU 1000000UL   //SET CPU CLOCK
 #endif
 #include <util/delay.h>
 #define CTC_MATCH_OVERFLOW ((F_CPU / 1000) / 8)
@@ -325,7 +325,7 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
   return (microseconds*0.17/ 2);
 }
 
-unsigned long pulseIn(volatile uint8_t pInno, uint8_t vAlue)
+/*unsigned long pulseIn(volatile uint8_t pInno, uint8_t vAlue)
 { 
 	char x;
   TCCR2A = (1 << WGM21) | (1 << COM2A1) | (1 << FOC2A) | (0 << COM2A0) | (0 << WGM20); //initializing in CTC mode
@@ -487,7 +487,7 @@ case 'l':
 	     			}  
 	}					 	
 
-
+*/
 class Serial
 {
 	public:
@@ -530,7 +530,8 @@ class Serial
 			return 1;				
  		else		
 			return 0;				
-	}};
+	}
+};
 
 
 class Serial1
@@ -570,12 +571,13 @@ class Serial1
 		flush();
 		UCSR1B&=0xe7;	//disabling RXEN & TXEN
 	}
-		uint8_t available(void){	//working fine
-		 if((UCSR1A & (1<<RXC1)))
-			return 1;				
- 		else		
-			return 0;				
-	}};
+	uint8_t available(void){	//working fine
+	if((UCSR1A & (1<<RXC1)))
+		return 1;				
+ 	else		
+		return 0;				
+	}
+};
 class Serial2
 {
 	public:
@@ -614,17 +616,18 @@ class Serial2
 		flush();
 		UCSR2B&=0xe7;	//disabling RXEN & TXEN
 	}
-		uint8_t available(void){	//working fine
-		 if((UCSR2A & (1<<RXC2)))
+	uint8_t available(void){	//working fine
+		if((UCSR2A & (1<<RXC2)))
 			return 1;				
  		else		
-			return 0;				}
-			};
+			return 0;				
+	}
+};
 
 class Serial3
 {
 	public:
-	void start( unsigned int BAUD){
+	void begin( unsigned int BAUD){
 		int uBrr;/*Set baud rate */
 		  uBrr=(F_CPU/16/BAUD-1);
 		UBRR3H = (unsigned char)(uBrr>>8);
@@ -633,7 +636,7 @@ class Serial3
 		UCSR3B = (1<<RXEN3)|(1<<TXEN3);
 	}
 	/* Set frame format: 8data, 2stop bit */
-	void send( unsigned char data ){
+	void write( unsigned char data ){
 		/* Wait for empty transmit buffer */
 		while ( !( UCSR3A & (1<<UDRE3)) )
 		;
@@ -641,7 +644,7 @@ class Serial3
 		UDR3= data;
 		_delay_ms(100);
 	}
-	unsigned char get( void ){
+	unsigned char read( void ){
 		/* Wait for data to be received */
 		while ( !(UCSR3A & (1<<RXC3)) )
 		;
@@ -663,7 +666,8 @@ class Serial3
 			return 1;				
  		else		
 			return 0;				
-	}};
+	}
+};
 void initADC()
 {
 	ADMUX=(1<<REFS0);				//Aref=AVcc
@@ -673,11 +677,12 @@ void initADC()
 int analogRead(int (pInno))
 {
         //prescalar set to default
+  	initADC();
   	ADMUX=(1<<REFS0)|(0<<REFS1);
   	ADCSRA|=(1<<ADEN);
-        ADMUX|=(pInno%8);//chose value from 0 to 7 to chose adc pin accordingly
-        ADCSRA|=(1<<ADEN);
-        ADCSRA|=(1<<ADSC);
+    ADMUX|=(pInno%8);//chose value from 0 to 7 to chose adc pin accordingly
+    ADCSRA|=(1<<ADEN);
+    ADCSRA|=(1<<ADSC);
 	while(ADCSRA&(1<<ADSC));
 	return (ADC);
 }
@@ -1019,19 +1024,16 @@ ISR(INT7_vect)
 ISR(TIMER1_OVF_vect)
 {
 	uSerfun(); 
-}
-*/
-<<<<<<< HEAD
+}*/
+
 Serial Serial;
 Serial1 Serial1;
 Serial2 Serial2;
 Serial3 Serial3;
-/*int main(){
+int main(){
 	//tinit();
 	setup();
 	while(1){
 		loop();
 	}
-}*/
-=======
->>>>>>> fe23e2e01a022d77fedc01e88a4ffe17921f99c8
+}
