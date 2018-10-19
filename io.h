@@ -1008,10 +1008,10 @@ Serial Serial;
 Serial1 Serial1;
 Serial2 Serial2;
 Serial3 Serial3;
-int main(){
-	tinit();
+/*int main(){
+	//tinit();
 	setup();
 	while(1){
 		loop();
 	}
-}
+}*/
