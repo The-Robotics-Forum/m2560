@@ -37,13 +37,13 @@ TODO: Add Toggle Mode in pinMode and digitalWrite function
 /**************************************************************************************************************************/
 const uint8_t OUTPUT=1,INPUT=0;
 const uint8_t HIGH=1,LOW=0;
-const uint8_t RISING=2,FALLING=3,CHANGE=4;      
+const uint8_t RISING=2,FALLING=3,CHANGE=4;
 volatile unsigned long tImer1_millis;
 //pinMapping
 int c[60]={0,1,4,5,5,3,3,4,5,6,4,5,6,7,1,0,1,0,3,2,1,0,6,7,0,1,2,3,4,5,6,7,7,6,5,4,3,2,1,0,7,2,1,0,7,6,5,4,3,2,1,0,3,2,1,0};
 
 char d[60]={'e','e','e','e','g','e','h','h','h','h','b','b','b','b','j','j','h','h','d','d','a','a','a','a','a','a','a','a','c','c','c','c','c','c','c','c','d','g','g','g','l','l','l','l','l','l','l','l','b','b','b','b'};
-	
+
 
 /**************************************************************************************************************************/
 
@@ -75,9 +75,9 @@ void pinMode(uint8_t pInno,uint8_t mOde)
 {
 	int l;
   	if(mOde==0)
-    { 
+    {
     	switch(d[pInno]){
- 
+
           	case'b':
                   DDRB&=~(1<<c[pInno]);
 		           break;
@@ -101,13 +101,13 @@ void pinMode(uint8_t pInno,uint8_t mOde)
 		          break;
 			case'l':
                   DDRL&=~(1<<c[pInno]);
-		          break;	        		   		   	  	  		 		 			 
-     	}  
+		          break;
+     	}
 	}
-	else{          
+	else{
 			switch(d[pInno])
          	{
-	 
+
 	        	case'b':
 	            	DDRB|=(1<<c[pInno]);
 			    	break;
@@ -131,17 +131,17 @@ void pinMode(uint8_t pInno,uint8_t mOde)
 			        break;
 				case'l':
 	                DDRL|=(1<<c[pInno]);
-			        break;	  		 		 			 
-	     }  
+			        break;
+	     }
 	}
 }
 
-void digitalWrite (uint8_t pInno ,uint8_t mOde)		 
+void digitalWrite (uint8_t pInno ,uint8_t mOde)
 {
    if(mOde==0)
         { switch(d[pInno])
          {
-	 
+
 	          case'b':
 	                  PORTB&=~(1<<c[pInno]);
 			           break;
@@ -151,7 +151,7 @@ void digitalWrite (uint8_t pInno ,uint8_t mOde)
 	          case'd':
 	                 PORTD&=~(1<<c[pInno]);
 			          break;
-				
+
 		      case'e':
 	                  PORTE&=~(1<<c[pInno]);
 			           break;
@@ -162,17 +162,17 @@ void digitalWrite (uint8_t pInno ,uint8_t mOde)
 			 case'h':
 	                  PORTH&=~(1<<c[pInno]);
 			           break;
-		     
+
 			     case'j':
 	                  PORTJ&=~(1<<c[pInno]);
 			           break;
 				     case'l':
 	                  PORTL&=~(1<<c[pInno]);
-			           break;	        		   		   	  	  		 		 			 
+			           break;
 	     }  }
 	else{          switch(d[pInno])
          {
-	 
+
 	          case'b':
 	                 PORTB|=(1<<c[pInno]);
 			           break;
@@ -182,7 +182,7 @@ void digitalWrite (uint8_t pInno ,uint8_t mOde)
 	          case'd':
 	                 PORTD|=(1<<c[pInno]);
 			          break;
-				    
+
 		      case'e':
 	                  PORTE|=(1<<c[pInno]);
 			           break;
@@ -201,19 +201,19 @@ void digitalWrite (uint8_t pInno ,uint8_t mOde)
 			           break;
 				     case'l':
 	                  PORTL|=(1<<c[pInno]);
-			           break;	  		 		 			 
-	     }  
+			           break;
+	     }
 }
 		 }
-		 
+
 
 uint8_t digitalRead(uint8_t pInno)
-{  
+{
 	uint8_t z;				//not a good practice
 	uint8_t x;				//not a good practice
    switch(d[pInno])
          {
-	 
+
 	          case'b':
 	                  z=PINB&(1<<c[pInno]);
 			           break;
@@ -223,7 +223,7 @@ uint8_t digitalRead(uint8_t pInno)
 	          case'd':
 	                  z=PIND&(1<<c[pInno]);
 			          break;
-				
+
 		      case'e':
 	                   z=PINE&(1<<c[pInno]);
 			           break;
@@ -234,15 +234,15 @@ uint8_t digitalRead(uint8_t pInno)
 			 case'h':
 	                  z=PINH&(1<<c[pInno]);
 			           break;
-		     
+
 			     case'j':
 	                   z=PINJ&(1<<c[pInno]);
 			           break;
 				     case'l':
 	                   z=PINL&(1<<c[pInno]);
 			           break;
-					   return z;	        		   		   	  	  		 		 			 
-	     }  
+					   return z;
+	     }
 }
 //FIXM
 /*static void turnOffPWM(uint8_t tImer)
@@ -258,15 +258,15 @@ uint8_t digitalRead(uint8_t pInno)
 		#if defined(TCCR1A) && defined(COM1C1)
 		case TIMER1C:   cbi(TCCR1A, COM1C1);    break;
 		#endif
-		
+
 		#if defined(TCCR2) && defined(COM21)
 		case  TIMER2:   cbi(TCCR2, COM21);      break;
 		#endif
-		
+
 		#if defined(TCCR0A) && defined(COM0A1)
 		case  TIMER0A:  cbi(TCCR0A, COM0A1);    break;
 		#endif
-		
+
 		#if defined(TCCR0A) && defined(COM0B1)
 		case  TIMER0B:  cbi(TCCR0A, COM0B1);    break;
 		#endif
@@ -276,7 +276,7 @@ uint8_t digitalRead(uint8_t pInno)
 		#if defined(TCCR2A) && defined(COM2B1)
 		case  TIMER2B:  cbi(TCCR2A, COM2B1);    break;
 		#endif
-		
+
 		#if defined(TCCR3A) && defined(COM3A1)
 		case  TIMER3A:  cbi(TCCR3A, COM3A1);    break;
 		#endif
@@ -289,17 +289,17 @@ uint8_t digitalRead(uint8_t pInno)
 
 		#if defined(TCCR4A) && defined(COM4A1)
 		case  TIMER4A:  cbi(TCCR4A, COM4A1);    break;
-		#endif					
+		#endif
 		#if defined(TCCR4A) && defined(COM4B1)
 		case  TIMER4B:  cbi(TCCR4A, COM4B1);    break;
 		#endif
 		#if defined(TCCR4A) && defined(COM4C1)
 		case  TIMER4C:  cbi(TCCR4A, COM4C1);    break;
-		#endif			
+		#endif
 		#if defined(TCCR4C) && defined(COM4D1)
 		case TIMER4D:	cbi(TCCR4C, COM4D1);	break;
-		#endif			
-			
+		#endif
+
 		#if defined(TCCR5A)
 		case  TIMER5A:  cbi(TCCR5A, COM5A1);    break;
 		case  TIMER5B:  cbi(TCCR5A, COM5B1);    break;
@@ -308,7 +308,7 @@ uint8_t digitalRead(uint8_t pInno)
 	}
 }
 */
-long unsigned int microsecondsToInches(long unsigned int mIcroseconds) 
+long unsigned int microsecondsToInches(long unsigned int mIcroseconds)
 {
   // According to Parallax's datasheet for the PING))), there are 73.746
   // microseconds per inch (i.e. sound travels at 1130 feet per second).
@@ -317,7 +317,7 @@ long unsigned int microsecondsToInches(long unsigned int mIcroseconds)
   return (mIcroseconds*0.00669/ 2);
 }
 
-long unsigned int microsecondsToCentimeters(long unsigned int microseconds) 
+long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
 {
   // The speed of sound is 340 m/s or 29 microseconds per centimeter.
   // The ping travels out and back, so to find the distance of the object we
@@ -326,7 +326,7 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
 }
 
 /*unsigned long pulseIn(volatile uint8_t pInno, uint8_t vAlue)
-{ 
+{
 	char x;
   TCCR2A = (1 << WGM21) | (1 << COM2A1) | (1 << FOC2A) | (0 << COM2A0) | (0 << WGM20); //initializing in CTC mode
   TCCR2A = (1 << CS20);
@@ -340,10 +340,10 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
 		          if (--mAxloops == 0)
 		            return 0;
 	                }
-             // wait for the pulse to start  
+             // wait for the pulse to start
               while (((PINB) && (c[pInno])) != vAlue)
 	              {
-		     if (--mAxloops == 0) 
+		     if (--mAxloops == 0)
 		          return 0;
 	           }
             // wait for the pulse to stop
@@ -360,7 +360,7 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
-  // wait for the pulse to start  
+  // wait for the pulse to start
                   while (((PINC) && (c[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
@@ -374,15 +374,15 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
                      	    }
                      return wIdth;
                          }break;
-						 
+
 	 case'd':
-	     
+
 	                 { while (((PIND) && (c[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
-  // wait for the pulse to start  
+  // wait for the pulse to start
                   while (((PIND) && (c[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
@@ -398,13 +398,13 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
                          } break; 		//case'h':
 				  //  DDRH|(0<<c[pInno]);
 	case'e':
-	                  
+
 	                 { while (((PINE) && (c[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
-  // wait for the pulse to start  
+  // wait for the pulse to start
                   while (((PINE) && (c[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
@@ -417,16 +417,16 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
                   		return 0;
                      	    }
                      return wIdth;
-                         } break; 			    
-	                  
+                         } break;
+
 case'h':
-	                 
+
 	                 { while (((PINH) &&(c[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
-  // wait for the pulse to start  
+  // wait for the pulse to start
                   while (((PINH) && (c[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
@@ -439,15 +439,15 @@ case'h':
                   		return 0;
                      	    }
                      return wIdth;
-                         } break;  
+                         } break;
 case'j':
-	                  
+
 	                 { while (((PINJ) && (c[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
-  // wait for the pulse to start  
+  // wait for the pulse to start
                   while (((PINJ) && (c[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
@@ -460,16 +460,16 @@ case'j':
                   		return 0;
                      	    }
                      return wIdth;
-                         }  
+                         }
 			           break;
 case 'l':
-	                  
+
 	                 { while (((PINL) && (c[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
-  // wait for the pulse to start  
+  // wait for the pulse to start
                   while (((PINL) && (c[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
@@ -482,10 +482,10 @@ case 'l':
                   		return 0;
                      	    }
                      return wIdth;
-                         }  
-			           break;	        		   		   	  	  		 		 			 
-	     			}  
-	}					 	
+                         }
+			           break;
+	     			}
+	}
 
 */
 class Serial
@@ -527,9 +527,9 @@ class Serial
 	}
 	uint8_t available(void){	//working fine
 		 if((UCSR0A & (1<<RXC0)))
-			return 1;				
- 		else		
-			return 0;				
+			return 1;
+ 		else
+			return 0;
 	}
 };
 
@@ -573,9 +573,9 @@ class Serial1
 	}
 	uint8_t available(void){	//working fine
 	if((UCSR1A & (1<<RXC1)))
-		return 1;				
- 	else		
-		return 0;				
+		return 1;
+ 	else
+		return 0;
 	}
 };
 class Serial2
@@ -583,7 +583,7 @@ class Serial2
 	public:
 	void begin( unsigned int BAUD){
 		/*Set baud rate */
-		int uBrr;	  
+		int uBrr;
 		uBrr=(F_CPU/16/BAUD-1);
 		UBRR2H = (unsigned char)(uBrr>>8);
 		UBRR2L = (unsigned char)uBrr;
@@ -618,9 +618,9 @@ class Serial2
 	}
 	uint8_t available(void){	//working fine
 		if((UCSR2A & (1<<RXC2)))
-			return 1;				
- 		else		
-			return 0;				
+			return 1;
+ 		else
+			return 0;
 	}
 };
 
@@ -663,9 +663,9 @@ class Serial3
 	}
 		uint8_t available(void){	//working fine
 		 if((UCSR3A & (1<<RXC3)))
-			return 1;				
- 		else		
-			return 0;				
+			return 1;
+ 		else
+			return 0;
 	}
 };
 void initADC()
@@ -689,8 +689,8 @@ int analogRead(int (pInno))
 
 void analogWrite(uint8_t pInno,uint8_t dUtycY)
 {
-  
-  
+
+
   switch(pInno)
   {
 	  case 11:
@@ -743,7 +743,7 @@ void analogWrite(uint8_t pInno,uint8_t dUtycY)
 		  TCCR0B=(1<<CS00);
 		  OCR0B=dUtycY;
 		  break;
-		  
+
 	  case 6:
 		  TCCR4A=(1<<WGM42)|(1<<WGM40)|(1<<COM4A1)|(1<<COM4A0);
 		  TCCR4B=(1<<CS40);
@@ -754,43 +754,43 @@ void analogWrite(uint8_t pInno,uint8_t dUtycY)
 		  TCCR4B=(1<<CS40);
 		  OCR4B=dUtycY;
 		  break;
-		  
-		  
+
+
   }
-}  
+}
 unsigned long millis ()
 {
     unsigned long millis_return;
 
     // Ensure this cannot be disrupted
     ATOMIC_BLOCK(ATOMIC_FORCEON) {
-        millis_return = tImer1_millis;
+        millis_return = tImer2_millis;
     }
- 
+
     return millis_return;
 }
 
-ISR (TIMER1_COMPA_vect)
+ISR (TIMER2_COMPA_vect)
 {
-    tImer1_millis++;
+    tImer2_millis++;
 }
 
 void tinit()
-{ 
-	TCCR1B |= (1 << WGM12) | (1 << CS11);
- 
+{
+	TCCR2B |= (1 << WGM22) | (1 << CS21);
+
     // Load the high byte, then the low byte
     // into the output compare
     OCR1AH = (CTC_MATCH_OVERFLOW >> 8);
     OCR1AL = CTC_MATCH_OVERFLOW;
- 
+
     // Enable the compare match interrupt
-    TIMSK1 |= (1 << OCIE1A);
+    TIMSK2 |= (1 << OCIE2A);
 
     // Now enable global interrupts
     sei();
 }
-	
+
 
 void delay(unsigned long mIllisec)
 {
@@ -819,6 +819,7 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
 
 long constrain(long nUm,long lOwer,long uPper)
 {
+<<<<<<< HEAD
 	if(nUm>uPper){
       return uPper;
   	}
@@ -827,6 +828,14 @@ long constrain(long nUm,long lOwer,long uPper)
   	}
     else 
     return nUm; 	
+=======
+	if(nUm<uPper){
+		return uPper;}
+	else if(nUm>lOwer){
+		return lOwer;}
+	else
+	return nUm;
+>>>>>>> 7cb9a0ed1842f9c54a8765a4451f2f2a2a9ba12a
 }
 void attachIntterupt(int pIn, void (*iSrfunc)(void), int cOmpare)		//cOmpare:LOW=0,HIGH1,RISING=2,FALLING=3
 {
@@ -868,7 +877,7 @@ void attachIntterupt(int pIn, void (*iSrfunc)(void), int cOmpare)		//cOmpare:LOW
 			EICRA|=(0<<ISC10)|(0<<ISC11);
 		}
 		break;
-		
+
 		case 2:
 		EIMSK|=1<<INT2;
 		switch(cOmpare)
@@ -886,7 +895,7 @@ void attachIntterupt(int pIn, void (*iSrfunc)(void), int cOmpare)		//cOmpare:LOW
 			EICRA|=(0<<ISC20)|(0<<ISC21);
 		}
 		break;
-		
+
 		case 3:
 		EIMSK|=1<<INT3;
 		switch(cOmpare)
@@ -904,7 +913,7 @@ void attachIntterupt(int pIn, void (*iSrfunc)(void), int cOmpare)		//cOmpare:LOW
 			EICRA|=(0<<ISC30)|(0<<ISC31);
 		}
 		break;
-		
+
 		case 4:
 		EIMSK|=1<<INT4;
                 switch(cOmpare)
@@ -922,7 +931,7 @@ void attachIntterupt(int pIn, void (*iSrfunc)(void), int cOmpare)		//cOmpare:LOW
 			EICRB|=(0<<ISC40)|(0<<ISC41);
 		}
 		break;
-		
+
 		case 5:
 		EIMSK|=1<<INT5;
 		switch(cOmpare)
@@ -938,10 +947,10 @@ void attachIntterupt(int pIn, void (*iSrfunc)(void), int cOmpare)		//cOmpare:LOW
 			break;
 			default:
                  	EICRB|=(0<<ISC40)|(0<<ISC41);
-			
+
 		}
 		break;
-		
+
 		case 6:
 		EIMSK|=1<<INT6;
 	        switch(cOmpare)
@@ -957,10 +966,10 @@ void attachIntterupt(int pIn, void (*iSrfunc)(void), int cOmpare)		//cOmpare:LOW
 			break;
 			default:
 			EICRB|=(0<<ISC60)|(0<<ISC61);
-			
+
 		}
 		break;
-		
+
 		case 7:
 		EIMSK|=1<<INT7;
 		switch(cOmpare)
@@ -978,7 +987,7 @@ void attachIntterupt(int pIn, void (*iSrfunc)(void), int cOmpare)		//cOmpare:LOW
 			EICRB|=(0<<ISC70)|(0<<ISC71);
 		}
 		break;
-		
+
 	        default:EICRA|=(0<<ISC01)|(0<<ISC00);
 	}
 }
@@ -1011,7 +1020,7 @@ ISR(INT6_vect)
     cAllisr();
 }
 ISR(INT7_vect)
-{ 
+{
     cAllisr();
 }
 
@@ -1025,7 +1034,7 @@ ISR(INT7_vect)
 
 ISR(TIMER1_OVF_vect)
 {
-	uSerfun(); 
+	uSerfun();
 }*/
 
 Serial Serial;
