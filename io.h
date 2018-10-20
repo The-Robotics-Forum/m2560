@@ -706,54 +706,57 @@ void analogWrite(uint8_t pInno,uint8_t dUtycY)
 		  OCR1B=dUtycY;
 		  break;
 	  case 10:
-		  TCCR2A=(1<<COM2A1)|(1<<COM2A0)|(1<<WGM21)|(1<<WGM20);
+		  TCCR2A=(1<<COM2A1)|(1<<WGM21)|(1<<WGM20);
 		  TCCR2B=(1<<CS20);
 		  OCR2A=dUtycY;
 		  break;
 	  case 9:
-		   TCCR2A=(1<<WGM21)|(1<<WGM20)|(1<<COM2B1)|(1<<COM2B0);
+		   TCCR2A=(1<<WGM21)|(1<<WGM20)|(1<<COM2B1);
 		   TCCR2B=(1<<CS20);
 		   OCR2B=dUtycY;
 		   break;
 	  case 5:
-		  TCCR3A=(1<<WGM32)|(1<<WGM30)|(1<<COM3A1)|(1<<COM3A0);
+		  TCCR3A=(1<<WGM32)|(1<<WGM30)|(1<<COM3A1);
 		  TCCR3B=(1<<CS30);
 		  OCR3A=dUtycY;
 		  break;
 	  case 2:
-		  TCCR3A=(1<<WGM32)|(1<<WGM30)|(1<<COM3B1)|(1<<COM3B0);
+	  	  DDRE|=(1<<PE4);	
+		  TCCR3A=(1<<WGM32)|(1<<WGM30)|(1<<COM3B1);
 		  TCCR3B=(1<<CS30);
 		  OCR3B=dUtycY;
+		  Serial.write(dUtycY);
 		  break;
 	  case 46:
-		  TCCR5A=(1<<WGM52)|(1<<WGM50)|(1<<COM5A1)|(1<<COM5A0);
+		  TCCR5A=(1<<WGM52)|(1<<WGM50)|(1<<COM5A1);
 		  TCCR5B=(1<<CS50);
 		  OCR5A=dUtycY;
 		  break;
 	  case 45:
-		  TCCR5A=(1<<WGM52)|(1<<WGM50)|(1<<COM5B1)|(1<<COM5B0);
+		  TCCR5A=(1<<WGM52)|(1<<WGM50)|(1<<COM5B1);
 		  TCCR5B=(1<<CS50);
 		  OCR5B=dUtycY;
 		  break;
 	  case 13:
-		  TCCR0A=(1<<WGM10)|(1<<WGM00)|(1<<COM0A1)|(1<<COM0A0);
+		  TCCR0A=(1<<WGM10)|(1<<WGM00)|(1<<COM0A1);
 		  TCCR0B=(1<<CS00);
 		  OCR0A=dUtycY;
 		  break;
 	  case 4:
-		  TCCR0A=(1<<WGM10)|(1<<WGM00)|(1<<COM0B1)|(1<<COM0B0);
-		  TCCR0B=(1<<CS00);
-		  OCR0B=dUtycY;
-		  Serial.write(dUtycY);
-		  break;
+	  	DDRG|=(1<<PG5);
+		TCCR0A=(1<<WGM10)|(1<<WGM00)|(1<<COM0B1);
+		TCCR0B=(1<<CS00);
+		OCR0B=dUtycY;
+		
+		break;
 
 	  case 6:
-		  TCCR4A=(1<<WGM42)|(1<<WGM40)|(1<<COM4A1)|(1<<COM4A0);
+		  TCCR4A=(1<<WGM42)|(1<<WGM40)|(1<<COM4A1);
 		  TCCR4B=(1<<CS40);
 		  OCR4A=dUtycY;
 		  break;
 	  case 7:
-		  TCCR4A=(1<<WGM42)|(1<<WGM40)|(1<<COM4B1)|(1<<COM4B0);
+		  TCCR4A=(1<<WGM42)|(1<<WGM40)|(1<<COM4B1);
 		  TCCR4B=(1<<CS40);
 		  OCR4B=dUtycY;
 		  break;
