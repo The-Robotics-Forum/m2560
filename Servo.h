@@ -37,28 +37,28 @@ public:
       case 2 :                            //OC3B
         DDRE|=(1<<PE4); // PORTB as OUTPUT
         TCCR3A|=(1<<WGM31)|(1<<COM3B1)|(1<<COM3B0);  //SETTING PRESCALAR AS 64 
-        TCCR3B|=(1<<WGM32)|(1<<WGM33)|(1<<CS30)|(1<<CS31); //FAST PWM MODE
+        TCCR3B|=(1<<WGM32)|(1<<WGM33)|(1<<CS30); //FAST PWM MODE
         ICR3=iCr;                    //generating 20msec pulse (pwm method)
         break;
      
       case 3 :                            //OC3C
         DDRE|=(1<<PE5); // PORTB as OUTPUT
         TCCR3A|=(1<<WGM31)|(1<<COM3C1)|(1<<COM3C0);  //SETTING PRESCALAR AS 64 
-        TCCR3B|=(1<<WGM32)|(1<<WGM33)|(1<<CS30)|(1<<CS31); //FAST PWM MODE
+        TCCR3B|=(1<<WGM32)|(1<<WGM33)|(1<<CS30); //FAST PWM MODE
         ICR3=iCr;                    //generating 20msec pulse (pwm method)
         break;
 
       case 6 :                            //OC4A
         DDRH|=(1<<PH3); // PORTB as OUTPUT
         TCCR4A|=(1<<WGM41)|(1<<COM4A1)|(1<<COM4A0);  //SETTING PRESCALAR AS 64 
-        TCCR4B|=(1<<WGM42)|(1<<WGM43)|(1<<CS40)|(1<<CS41); //FAST PWM MODE
+        TCCR4B|=(1<<WGM42)|(1<<WGM43)|(1<<CS40); //FAST PWM MODE
         ICR4=iCr;                    //generating 20msec pulse (pwm method)
         break;
 
       case 7 :                            //OC4B
         DDRH|=(1<<PH4); // PORTB as OUTPUT
         TCCR4A|=(1<<WGM41)|(1<<COM4B1)|(1<<COM4B0);  //SETTING PRESCALAR AS 64 
-        TCCR4B|=(1<<WGM42)|(1<<WGM43)|(1<<CS40)|(1<<CS41); //FAST PWM MODE
+        TCCR4B|=(1<<WGM42)|(1<<WGM43)|(1<<CS40); //FAST PWM MODE
         ICR4=iCr;                    //generating 20msec pulse (pwm method)
         break;
 
@@ -97,6 +97,7 @@ public:
   void write(int vAl)           //PIN=servo pin no. on mega,vAl=angle F_CPU for the servo at pin
   {
     vAl=constraint(mapAngle(vAl,0,270,iCr/40,iCr/8.7),iCr/40,iCr/8);
+    Serial.write(pIn);
     switch(pIn)
     {
      case 11:
