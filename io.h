@@ -30,7 +30,7 @@ TODO: Add Toggle Mode in pinMode and digitalWrite function
 #include <avr/interrupt.h>
 #include <util/atomic.h>
 #ifndef F_CPU
-#define F_CPU 16000000UL   //SET CPU CLOCK
+#define F_CPU 1000000UL   //SET CPU CLOCK
 #endif
 #include <util/delay.h>
 #define CTC_MATCH_OVERFLOW ((F_CPU / 1000) / 8)
