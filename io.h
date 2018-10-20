@@ -730,7 +730,6 @@ void analogWrite(uint8_t pInno,uint8_t dUtycY)
 		  TCCR3A=(1<<WGM32)|(1<<WGM30)|(1<<COM3B1);
 		  TCCR3B=(1<<CS30);
 		  OCR3B=dUtycY;
-		  Serial.write(dUtycY);
 		  break;
 	  case 46:
 		  DDRL|=(1<<PL3);
@@ -755,7 +754,6 @@ void analogWrite(uint8_t pInno,uint8_t dUtycY)
 		TCCR0A=(1<<WGM10)|(1<<WGM00)|(1<<COM0B1);
 		TCCR0B=(1<<CS00);
 		OCR0B=dUtycY;
-		
 		break;
 
 	  case 6:
