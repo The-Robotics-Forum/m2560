@@ -30,7 +30,7 @@ TODO: Add Toggle Mode in pinMode and digitalWrite function
 #include <avr/interrupt.h>
 #include <util/atomic.h>
 #ifndef F_CPU
-#define F_CPU 1000000UL   //SET CPU CLOCK
+#define F_CPU 16000000UL   //SET CPU CLOCK
 #endif
 #include <util/delay.h>
 #define CTC_MATCH_OVERFLOW ((F_CPU / 1000) / 8)
@@ -668,6 +668,10 @@ class Serial3
 			return 0;
 	}
 };
+Serial Serial;
+Serial1 Serial1;
+Serial2 Serial2;
+Serial3 Serial3;
 void initADC()
 {
 	ADMUX=(1<<REFS0);				//Aref=AVcc
@@ -689,8 +693,6 @@ int analogRead(int (pInno))
 
 void analogWrite(uint8_t pInno,uint8_t dUtycY)
 {
-
-
   switch(pInno)
   {
 	  case 11:
@@ -742,6 +744,7 @@ void analogWrite(uint8_t pInno,uint8_t dUtycY)
 		  TCCR0A=(1<<WGM10)|(1<<WGM00)|(1<<COM0B1)|(1<<COM0B0);
 		  TCCR0B=(1<<CS00);
 		  OCR0B=dUtycY;
+		  Serial.write(dUtycY);
 		  break;
 
 	  case 6:
@@ -816,7 +819,7 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-long constrain(long nUm,long lOwer,long uPper)
+long constrain(long nUm, long lOwer, long uPper)
 {
 	if(nUm>uPper){
       return uPper;
@@ -1027,10 +1030,6 @@ ISR(TIMER1_OVF_vect)
 	uSerfun();
 }*/
 
-Serial Serial;
-Serial1 Serial1;
-Serial2 Serial2;
-Serial3 Serial3;
 int main(){
 	//tinit();
 	setup();
