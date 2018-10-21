@@ -297,34 +297,35 @@ uint8_t digitalRead(uint8_t pInno)
 	uint8_t digitalstatus;
 	uint8_t reference=0;				//not a good practice
    switch(rEgister[pInno])
-      {   case'a':reference=(1<<bIt[pInno]);
-				          digitalstatus=PINA&reference;
-									break;
-	        case'b': reference=(1<<bIt[pInno]);
-				    	    digitalstatus=PINB&reference;
+      {   case'a':      reference=(1<<bIt[pInno]);
+				        digitalstatus=!(!(PINA&reference));
+						break;
+	        case'b':    reference=(1<<bIt[pInno]);
+				    	digitalstatus=!(!(PINB&reference));
 			            break;
-	        case'c':reference=(1<<bIt[pInno]);
-					        digitalstatus=PINC&reference;
+	        case'c':    reference=(1<<bIt[pInno]);
+					    digitalstatus=!(!(PINC&reference));
 			            break;
-	        case'd':reference=(1<<bIt[pInno]);
-					        digitalstatus=PIND&reference;
+	        case'd':    reference=(1<<bIt[pInno]);
+					    digitalstatus=!(!(PIND&reference));
 			            break;
-		      case'e':reference=(1<<bIt[pInno]);
-			            digitalstatus=PINE&reference;
+		      case'e':  reference=(1<<bIt[pInno]);
+			            digitalstatus=!(!(PINE&reference));
 			            break;
 		    	case'g':reference=(1<<bIt[pInno]);
-			            digitalstatus=PING&reference;
+			            digitalstatus=!(!(PING&reference));
 			            break;
 			    case'h':reference=(1<<bIt[pInno]);
-		              digitalstatus=PINH&reference;
+		              digitalstatus=!(!(PINH&reference));
 		              break;
 			    case'j':reference=(1<<bIt[pInno]);
-		              digitalstatus=PINJ&reference;
+		              digitalstatus=!(!(PINJ&reference));
 		              break;
 			    case'l':reference=(1<<bIt[pInno]);
-			            digitalstatus=PINL&reference;
+			            digitalstatus=!(!(PINL&reference));
 			            break;
 	     }
+return digitalstatus;
 }
 //FIXM
 /*static void turnOffPWM(uint8_t tImer)
