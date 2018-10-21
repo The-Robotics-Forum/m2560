@@ -697,76 +697,76 @@ void analogWrite(uint8_t pInno,uint8_t dUtycY)
   {
 	  case 11:
 		   DDRB|=(1<<PB5);
-		   TCCR1A=(1<<WGM10)|(1<<WGM12)|(1<<COM1A1);
-		   TCCR1B=(1<<CS11)|(1<<CS10);
+		   TCCR1A|=(1<<WGM10)|(1<<WGM12)|(1<<COM1A1);
+		   TCCR1B|=(1<<CS11)|(1<<CS10);
 		   OCR1A=dUtycY;
 		   break;
 	  case 12:
 		  DDRB|=(1<<PB6);
-		  TCCR1A=(1<<WGM10)|(1<<WGM12)|(1<<COM1B1);
-		  TCCR1B=(1<<CS11)|(1<<CS10);
+		  TCCR1A|=(1<<WGM10)|(1<<WGM12)|(1<<COM1B1);
+		  TCCR1B|=(1<<CS11)|(1<<CS10);
 		  OCR1B=dUtycY;
 		  break;
 	  case 10:
 		  DDRB|=(1<<PB4);
-		  TCCR2A=(1<<COM2A1)|(1<<WGM21)|(1<<WGM20);
-		  TCCR2B=(1<<CS20);
+		  TCCR2A|=(1<<COM2A1)|(1<<WGM21)|(1<<WGM20);
+		  TCCR2B|=(1<<CS20);
 		  OCR2A=dUtycY;
 		  break;
 	  case 9:
 		   DDRH|=(1<<PH6);
-		   TCCR2A=(1<<WGM21)|(1<<WGM20)|(1<<COM2B1);
-		   TCCR2B=(1<<CS20);
+		   TCCR2A|=(1<<WGM21)|(1<<WGM20)|(1<<COM2B1);
+		   TCCR2B|=(1<<CS20);
 		   OCR2B=dUtycY;
 		   break;
 	  case 5:
 		  DDRE|=(1<<PE3);
-		  TCCR3A=(1<<WGM32)|(1<<WGM30)|(1<<COM3A1);
-		  TCCR3B=(1<<CS30);
+		  TCCR3A|=(1<<WGM32)|(1<<WGM30)|(1<<COM3A1);
+		  TCCR3B|=(1<<CS30);
 		  OCR3A=dUtycY;
 		  break;
 	  case 2:
 	  	  DDRE|=(1<<PE4);	
-		  TCCR3A=(1<<WGM32)|(1<<WGM30)|(1<<COM3B1);
-		  TCCR3B=(1<<CS30);
+		  TCCR3A|=(1<<WGM32)|(1<<WGM30)|(1<<COM3B1);
+		  TCCR3B|=(1<<CS30);
 		  OCR3B=dUtycY;
 		  break;
 	  case 46:
 		  DDRL|=(1<<PL3);
-		  TCCR5A=(1<<WGM52)|(1<<WGM50)|(1<<COM5A1);
-		  TCCR5B=(1<<CS50);
+		  TCCR5A|=(1<<WGM52)|(1<<WGM50)|(1<<COM5A1);
+		  TCCR5B|=(1<<CS50);
 		  OCR5A=dUtycY;
 		  break;
 	  case 45:
 		  DDRL|=(1<<PL4);
-		  TCCR5A=(1<<WGM52)|(1<<WGM50)|(1<<COM5B1);
-		  TCCR5B=(1<<CS50);
+		  TCCR5A|=(1<<WGM52)|(1<<WGM50)|(1<<COM5B1);
+		  TCCR5B|=(1<<CS50);
 		  OCR5B=dUtycY;
 		  break;
 	  case 13:
 		  DDRB|=(1<<PB7);
-		  TCCR0A=(1<<WGM10)|(1<<WGM00)|(1<<COM0A1);
-		  TCCR0B=(1<<CS00);
+		  TCCR0A|=(1<<WGM10)|(1<<WGM00)|(1<<COM0A1);
+		  TCCR0B|=(1<<CS00);
 		  OCR0A=dUtycY;
 		  break;
 	  case 4:
 	  	DDRG|=(1<<PG5);
-		TCCR0A=(1<<WGM10)|(1<<WGM00)|(1<<COM0B1);
-		TCCR0B=(1<<CS00);
+		TCCR0A|=(1<<WGM10)|(1<<WGM00)|(1<<COM0B1);
+		TCCR0B|=(1<<CS00);
 		OCR0B=dUtycY;
 		break;
 
 	  case 6:
 		  DDRH|=(1<<PH3);
-		  TCCR4A=(1<<WGM42)|(1<<WGM40)|(1<<COM4A1);
-		  TCCR4B=(1<<CS40);
+		  TCCR4A|=(1<<WGM42)|(1<<WGM40)|(1<<COM4A1);
+		  TCCR4B|=(1<<CS40);
 		  OCR4A=dUtycY;
 		  break;
 	  case 7:
 		  
 		  DDRH|=(1<<PH4);
-		TCCR4A=(1<<WGM42)|(1<<WGM40)|(1<<COM4B1);
-		  TCCR4B=(1<<CS40);
+		TCCR4A|=(1<<WGM42)|(1<<WGM40)|(1<<COM4B1);
+		  TCCR4B|=(1<<CS40);
 		  OCR4B=dUtycY;
 		  break;
 
@@ -1041,7 +1041,6 @@ ISR(TIMER1_OVF_vect)
 {
 	uSerfun();
 }*/
-
 int main(){
 	//tinit();
 	setup();
