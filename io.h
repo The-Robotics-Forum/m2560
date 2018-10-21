@@ -138,74 +138,81 @@ void pinMode(uint8_t pInno,uint8_t mOde)
 
 void digitalWrite (uint8_t pInno ,uint8_t mOde)
 {
-   if(mOde==0)
-        { 
-        	switch(rEgister[pInno])
-         {
+   if(mOde==0){ 
+    	switch(rEgister[pInno])
+     	{
 
-	          case'b':
-	                  PORTB&=~(1<<bIt[pInno]);
-			           break;
-	          case'c':
-	                 PORTC&=~(1<<bIt[pInno]);
-			          break;
-	          case'd':
-	                 PORTD&=~(1<<bIt[pInno]);
-			          break;
+	        case'b':
+	            PORTB&=~(1<<bIt[pInno]);
+			    break;
+	        
+	        case'c':
+	            PORTC&=~(1<<bIt[pInno]);
+			    break;
+	        
+	        case'd':
+	            PORTD&=~(1<<bIt[pInno]);
+			    break;
 
-		      case'e':
-	                  PORTE&=~(1<<bIt[pInno]);
-			           break;
+		    case'e':
+	        	PORTE&=~(1<<bIt[pInno]);
+			    break;
 
-			  case'g':
-	                  PORTG=(0<<bIt[pInno]);
-			           break;
-			 case'h':
-	                  PORTH&=~(1<<bIt[pInno]);
-			           break;
+			case'g':
+	        	PORTG&=~(1<<bIt[pInno]);
+			    break;
 
-			     case'j':
-	                  PORTJ&=~(1<<bIt[pInno]);
-			           break;
-				     case'l':
-	                  PORTL&=~(1<<bIt[pInno]);
-			           break;
-	     }  }
-	else{          switch(rEgister[pInno])
-         {
+			case'h':
+	            PORTH&=~(1<<bIt[pInno]);
+			    break;
 
-	          case'b':
-	                 PORTB|=(1<<bIt[pInno]);
-			           break;
-	          case'c':
-	                 PORTC|=(1<<bIt[pInno]);
-			          break;
-	          case'd':
-	                 PORTD|=(1<<bIt[pInno]);
-			          break;
+			case'j':
+	            PORTJ&=~(1<<bIt[pInno]);
+			    break;
+			    
+			case'l':
+	            PORTL&=~(1<<bIt[pInno]);
+			    break;
+	    }  
+	}
+	else{
+		switch(rEgister[pInno])
+		{
 
-		      case'e':
-	                  PORTE|=(1<<bIt[pInno]);
-			           break;
+	        case'b':
+	        	PORTB|=(1<<bIt[pInno]);
+			    break;
+	        
+	        case'c':
+	        	PORTC|=(1<<bIt[pInno]);
+			    break;
+	        
+	        case'd':
+	            PORTD|=(1<<bIt[pInno]);
+			    break;
 
-			     case'g':
-	                  PORTG|=(1<<bIt[pInno]);
-			           break;
-			 case'h':
-	                  PORTH|=(1<<bIt[pInno]);
-			           break;
-		     /*case'i':
-	                  PORTI|=(1<<bIt[pInno]);
-			           break;*/
-			     case'j':
-	                  PORTJ|=(1<<bIt[pInno]);
-			           break;
-				     case'l':
-	                  PORTL|=(1<<bIt[pInno]);
-			           break;
-	     }
+		    case'e':
+	            PORTE|=(1<<bIt[pInno]);
+			    break;
+
+			case'g':
+	            PORTG|=(1<<bIt[pInno]);
+			    break;
+			
+			case'h':
+	            PORTH|=(1<<bIt[pInno]);
+			    break;
+
+			case'j':
+	        	PORTJ|=(1<<bIt[pInno]);
+			    break;
+			
+			case'l':
+	            PORTL|=(1<<bIt[pInno]);
+			    break;
+	    }
+	}
 }
-		 }
 
 
 uint8_t digitalRead(uint8_t pInno)
@@ -215,34 +222,37 @@ uint8_t digitalRead(uint8_t pInno)
    switch(rEgister[pInno])
          {
 
-	          case'b':
-	                  z=PINB&(1<<bIt[pInno]);
-			           break;
-	          case'c':
-	                  z=PINC&(1<<bIt[pInno]);
-			          break;
-	          case'd':
-	                  z=PIND&(1<<bIt[pInno]);
-			          break;
+	        case'b':
+	            z=PINB&(1<<bIt[pInno]);
+			    break;
+	        
+	        case'c':
+	            z=PINC&(1<<bIt[pInno]);
+			    break;
+	        
+	        case'd':
+	            z=PIND&(1<<bIt[pInno]);
+			    break;
 
-		      case'e':
-	                   z=PINE&(1<<bIt[pInno]);
-			           break;
+		    case'e':
+	            z=PINE&(1<<bIt[pInno]);
+			    break;
 
-			     case'g':
-	                   z=PING&(1<<bIt[pInno]);
-			           break;
-			 case'h':
-	                  z=PINH&(1<<bIt[pInno]);
-			           break;
+			case'g':
+	            z=PING&(1<<bIt[pInno]);
+			    break;
+			
+			case'h':
+	            z=PINH&(1<<bIt[pInno]);
+			    break;
 
-			     case'j':
-	                   z=PINJ&(1<<bIt[pInno]);
-			           break;
-				     case'l':
-	                   z=PINL&(1<<bIt[pInno]);
-			           break;
-					   return z;
+			case'j':
+	            z=PINJ&(1<<bIt[pInno]);
+			    break;
+			
+			case'l':
+	            z=PINL&(1<<bIt[pInno]);
+			    break;
 	     }
 }
 //FIXM
