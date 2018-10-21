@@ -40,9 +40,9 @@ const uint8_t HIGH=1,LOW=0;
 const uint8_t RISING=2,FALLING=3,CHANGE=4;
 volatile unsigned long tImer2_millis;
 //pinMapping
-int c[60]={0,1,4,5,5,3,3,4,5,6,4,5,6,7,1,0,1,0,3,2,1,0,6,7,0,1,2,3,4,5,6,7,7,6,5,4,3,2,1,0,7,2,1,0,7,6,5,4,3,2,1,0,3,2,1,0};
+int bIt[60]={0,1,4,5,5,3,3,4,5,6,4,5,6,7,1,0,1,0,3,2,1,0,6,7,0,1,2,3,4,5,6,7,7,6,5,4,3,2,1,0,7,2,1,0,7,6,5,4,3,2,1,0,3,2,1,0};
 
-char d[60]={'e','e','e','e','g','e','h','h','h','h','b','b','b','b','j','j','h','h','d','d','a','a','a','a','a','a','a','a','c','c','c','c','c','c','c','c','d','g','g','g','l','l','l','l','l','l','l','l','b','b','b','b'};
+char rEgister[60]={'e','e','e','e','g','e','h','h','h','h','b','b','b','b','j','j','h','h','d','d','a','a','a','a','a','a','a','a','c','c','c','c','c','c','c','c','d','g','g','g','l','l','l','l','l','l','l','l','b','b','b','b'};
 
 
 /**************************************************************************************************************************/
@@ -76,61 +76,61 @@ void pinMode(uint8_t pInno,uint8_t mOde)
 	int l;
   	if(mOde==0)
     {
-    	switch(d[pInno]){
+    	switch(rEgister[pInno]){
 
           	case'b':
-                  DDRB&=~(1<<c[pInno]);
+                  DDRB&=~(1<<bIt[pInno]);
 		           break;
           	case'c':
-                 DDRC&=~(1<<c[pInno]);
+                 DDRC&=~(1<<bIt[pInno]);
 		          break;
           	case'd':
-                 DDRD&=~(1<<c[pInno]);
+                 DDRD&=~(1<<bIt[pInno]);
 		          break;
 	      	case'e':
-                  DDRE&=~(1<<c[pInno]);
+                  DDRE&=~(1<<bIt[pInno]);
 		           break;
 		    case'g':
-                  DDRG&=~(1<<c[pInno]);
+                  DDRG&=~(1<<bIt[pInno]);
 		           break;
 			case'h':
-                  DDRH&=~(1<<c[pInno]);
+                  DDRH&=~(1<<bIt[pInno]);
 				  break;
 		    case'j':
-                  DDRJ&=~(1<<c[pInno]);
+                  DDRJ&=~(1<<bIt[pInno]);
 		          break;
 			case'l':
-                  DDRL&=~(1<<c[pInno]);
+                  DDRL&=~(1<<bIt[pInno]);
 		          break;
      	}
 	}
 	else{
-			switch(d[pInno])
+			switch(rEgister[pInno])
          	{
 
 	        	case'b':
-	            	DDRB|=(1<<c[pInno]);
+	            	DDRB|=(1<<bIt[pInno]);
 			    	break;
 	          	case'c':
-	                DDRC|=(1<<c[pInno]);
+	                DDRC|=(1<<bIt[pInno]);
 			        break;
 	          	case'd':
-	                DDRD|=(1<<c[pInno]);
+	                DDRD|=(1<<bIt[pInno]);
 			        break;
 		      	case'e':
-	                DDRE|=(1<<c[pInno]);
+	                DDRE|=(1<<bIt[pInno]);
 			        break;
 			    case'g':
-	                DDRG|=(1<<c[pInno]);
+	                DDRG|=(1<<bIt[pInno]);
 			        break;
 			 	case'h':
-	                DDRH|=(1<<c[pInno]);
+	                DDRH|=(1<<bIt[pInno]);
 			        break;
 			    case'j':
-	                DDRJ|=(1<<c[pInno]);
+	                DDRJ|=(1<<bIt[pInno]);
 			        break;
 				case'l':
-	                DDRL|=(1<<c[pInno]);
+	                DDRL|=(1<<bIt[pInno]);
 			        break;
 	     }
 	}
@@ -139,68 +139,68 @@ void pinMode(uint8_t pInno,uint8_t mOde)
 void digitalWrite (uint8_t pInno ,uint8_t mOde)
 {
    if(mOde==0)
-        { switch(d[pInno])
+        { switch(rEgister[pInno])
          {
 
 	          case'b':
-	                  PORTB&=~(1<<c[pInno]);
+	                  PORTB&=~(1<<bIt[pInno]);
 			           break;
 	          case'c':
-	                 PORTB&=~(1<<c[pInno]);
+	                 PORTB&=~(1<<bIt[pInno]);
 			          break;
 	          case'd':
-	                 PORTD&=~(1<<c[pInno]);
+	                 PORTD&=~(1<<bIt[pInno]);
 			          break;
 
 		      case'e':
-	                  PORTE&=~(1<<c[pInno]);
+	                  PORTE&=~(1<<bIt[pInno]);
 			           break;
 
 			     case'g':
-	                  PORTG&=~(1<<c[pInno]);
+	                  PORTG&=~(1<<bIt[pInno]);
 			           break;
 			 case'h':
-	                  PORTH&=~(1<<c[pInno]);
+	                  PORTH&=~(1<<bIt[pInno]);
 			           break;
 
 			     case'j':
-	                  PORTJ&=~(1<<c[pInno]);
+	                  PORTJ&=~(1<<bIt[pInno]);
 			           break;
 				     case'l':
-	                  PORTL&=~(1<<c[pInno]);
+	                  PORTL&=~(1<<bIt[pInno]);
 			           break;
 	     }  }
-	else{          switch(d[pInno])
+	else{          switch(rEgister[pInno])
          {
 
 	          case'b':
-	                 PORTB|=(1<<c[pInno]);
+	                 PORTB|=(1<<bIt[pInno]);
 			           break;
 	          case'c':
-	                 PORTC|=(1<<c[pInno]);
+	                 PORTC|=(1<<bIt[pInno]);
 			          break;
 	          case'd':
-	                 PORTD|=(1<<c[pInno]);
+	                 PORTD|=(1<<bIt[pInno]);
 			          break;
 
 		      case'e':
-	                  PORTE|=(1<<c[pInno]);
+	                  PORTE|=(1<<bIt[pInno]);
 			           break;
 
 			     case'g':
-	                  PORTG|=(1<<c[pInno]);
+	                  PORTG|=(1<<bIt[pInno]);
 			           break;
 			 case'h':
-	                  PORTH|=(1<<c[pInno]);
+	                  PORTH|=(1<<bIt[pInno]);
 			           break;
 		     /*case'i':
-	                  PORTI|=(1<<c[pInno]);
+	                  PORTI|=(1<<bIt[pInno]);
 			           break;*/
 			     case'j':
-	                  PORTJ|=(1<<c[pInno]);
+	                  PORTJ|=(1<<bIt[pInno]);
 			           break;
 				     case'l':
-	                  PORTL|=(1<<c[pInno]);
+	                  PORTL|=(1<<bIt[pInno]);
 			           break;
 	     }
 }
@@ -211,35 +211,35 @@ uint8_t digitalRead(uint8_t pInno)
 {
 	uint8_t z;				//not a good practice
 	uint8_t x;				//not a good practice
-   switch(d[pInno])
+   switch(rEgister[pInno])
          {
 
 	          case'b':
-	                  z=PINB&(1<<c[pInno]);
+	                  z=PINB&(1<<bIt[pInno]);
 			           break;
 	          case'c':
-	                  z=PINC&(1<<c[pInno]);
+	                  z=PINC&(1<<bIt[pInno]);
 			          break;
 	          case'd':
-	                  z=PIND&(1<<c[pInno]);
+	                  z=PIND&(1<<bIt[pInno]);
 			          break;
 
 		      case'e':
-	                   z=PINE&(1<<c[pInno]);
+	                   z=PINE&(1<<bIt[pInno]);
 			           break;
 
 			     case'g':
-	                   z=PING&(1<<c[pInno]);
+	                   z=PING&(1<<bIt[pInno]);
 			           break;
 			 case'h':
-	                  z=PINH&(1<<c[pInno]);
+	                  z=PINH&(1<<bIt[pInno]);
 			           break;
 
 			     case'j':
-	                   z=PINJ&(1<<c[pInno]);
+	                   z=PINJ&(1<<bIt[pInno]);
 			           break;
 				     case'l':
-	                   z=PINL&(1<<c[pInno]);
+	                   z=PINL&(1<<bIt[pInno]);
 			           break;
 					   return z;
 	     }
@@ -333,21 +333,21 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
   unsigned long mAxloops = 500000;
   unsigned long wIdth = 0;
   // wait for any previous pulse to end
-  switch(d[pInno]){
+  switch(rEgister[pInno]){
             case'b':
-	               { while (((PINB) && ((c[pInno]))) == vAlue)
+	               { while (((PINB) && ((bIt[pInno]))) == vAlue)
 	              {
 		          if (--mAxloops == 0)
 		            return 0;
 	                }
              // wait for the pulse to start
-              while (((PINB) && (c[pInno])) != vAlue)
+              while (((PINB) && (bIt[pInno])) != vAlue)
 	              {
 		     if (--mAxloops == 0)
 		          return 0;
 	           }
             // wait for the pulse to stop
-             while (((PINB) && (c[pInno])) == vAlue)
+             while (((PINB) && (bIt[pInno])) == vAlue)
 	                   {
 	               	if (++wIdth == mAxloops)
 		          return 0;
@@ -355,19 +355,19 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
               return wIdth;
                     }  break;
  case'c':
-	                 { while (((PINC) && (c[pInno])) == vAlue)
+	                 { while (((PINC) && (bIt[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
   // wait for the pulse to start
-                  while (((PINC) && (c[pInno])) != vAlue)
+                  while (((PINC) && (bIt[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
 		                 return 0;
 	                      }
   // wait for the pulse to stop
-                while (((PINC) && (c[pInno])) == vAlue)
+                while (((PINC) && (bIt[pInno])) == vAlue)
 	                 {
                  		if (++wIdth == mAxloops)
                   		return 0;
@@ -377,41 +377,41 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
 
 	 case'd':
 
-	                 { while (((PIND) && (c[pInno])) == vAlue)
+	                 { while (((PIND) && (bIt[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
   // wait for the pulse to start
-                  while (((PIND) && (c[pInno])) != vAlue)
+                  while (((PIND) && (bIt[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
 		                 return 0;
 	                      }
   // wait for the pulse to stop
-                while (((PIND) && (c[pInno])) == vAlue)
+                while (((PIND) && (bIt[pInno])) == vAlue)
 	                 {
                  		if (++wIdth == mAxloops)
                   		return 0;
                      	    }
                      return wIdth;
                          } break; 		//case'h':
-				  //  DDRH|(0<<c[pInno]);
+				  //  DDRH|(0<<bIt[pInno]);
 	case'e':
 
-	                 { while (((PINE) && (c[pInno])) == vAlue)
+	                 { while (((PINE) && (bIt[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
   // wait for the pulse to start
-                  while (((PINE) && (c[pInno])) != vAlue)
+                  while (((PINE) && (bIt[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
 		                 return 0;
 	                      }
   // wait for the pulse to stop
-                while (((PINE) && (c[pInno])) == vAlue)
+                while (((PINE) && (bIt[pInno])) == vAlue)
 	                 {
                  		if (++wIdth == mAxloops)
                   		return 0;
@@ -421,19 +421,19 @@ long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
 
 case'h':
 
-	                 { while (((PINH) &&(c[pInno])) == vAlue)
+	                 { while (((PINH) &&(bIt[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
   // wait for the pulse to start
-                  while (((PINH) && (c[pInno])) != vAlue)
+                  while (((PINH) && (bIt[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
 		                 return 0;
 	                      }
   // wait for the pulse to stop
-                while (((PINH) && ((c[pInno]))) == vAlue)
+                while (((PINH) && ((bIt[pInno]))) == vAlue)
 	                 {
                  		if (++wIdth == mAxloops)
                   		return 0;
@@ -442,19 +442,19 @@ case'h':
                          } break;
 case'j':
 
-	                 { while (((PINJ) && (c[pInno])) == vAlue)
+	                 { while (((PINJ) && (bIt[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
   // wait for the pulse to start
-                  while (((PINJ) && (c[pInno])) != vAlue)
+                  while (((PINJ) && (bIt[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
 		                 return 0;
 	                      }
   // wait for the pulse to stop
-                while (((PINJ) && (c[pInno])) == vAlue)
+                while (((PINJ) && (bIt[pInno])) == vAlue)
 	                 {
                  		if (++wIdth == mAxloops)
                   		return 0;
@@ -464,19 +464,19 @@ case'j':
 			           break;
 case 'l':
 
-	                 { while (((PINL) && (c[pInno])) == vAlue)
+	                 { while (((PINL) && (bIt[pInno])) == vAlue)
 	                {
 		              if (--mAxloops == 0)
 		               return 0;
 	                   }
   // wait for the pulse to start
-                  while (((PINL) && (c[pInno])) != vAlue)
+                  while (((PINL) && (bIt[pInno])) != vAlue)
 	                  {
 		              if (--mAxloops == 0)
 		                 return 0;
 	                      }
   // wait for the pulse to stop
-                while (((PINL) && (c[pInno])) == vAlue)
+                while (((PINL) && (bIt[pInno])) == vAlue)
 	                 {
                  		if (++wIdth == mAxloops)
                   		return 0;
