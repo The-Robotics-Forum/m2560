@@ -139,14 +139,15 @@ void pinMode(uint8_t pInno,uint8_t mOde)
 void digitalWrite (uint8_t pInno ,uint8_t mOde)
 {
    if(mOde==0)
-        { switch(rEgister[pInno])
+        { 
+        	switch(rEgister[pInno])
          {
 
 	          case'b':
 	                  PORTB&=~(1<<bIt[pInno]);
 			           break;
 	          case'c':
-	                 PORTB&=~(1<<bIt[pInno]);
+	                 PORTC&=~(1<<bIt[pInno]);
 			          break;
 	          case'd':
 	                 PORTD&=~(1<<bIt[pInno]);
@@ -156,8 +157,8 @@ void digitalWrite (uint8_t pInno ,uint8_t mOde)
 	                  PORTE&=~(1<<bIt[pInno]);
 			           break;
 
-			     case'g':
-	                  PORTG&=~(1<<bIt[pInno]);
+			  case'g':
+	                  PORTG=(0<<bIt[pInno]);
 			           break;
 			 case'h':
 	                  PORTH&=~(1<<bIt[pInno]);
