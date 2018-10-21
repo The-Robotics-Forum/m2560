@@ -1,4 +1,3 @@
-
 class Servo{
 private:
   int iCr;
@@ -96,10 +95,10 @@ public:
 
   void write(int vAl)           //PIN=servo pin no. on mega,vAl=angle F_CPU for the servo at pin
   {
-    vAl=constraint(mapAngle(vAl,0,270,iCr/40,iCr/8.7),iCr/40,iCr/8);
+    vAl=constraint(mapAngle(vAl,0,200,iCr/39,iCr/8.3),iCr/40,iCr/8);
     switch(pIn)
     {
-     case 11:
+      case 11:
         OCR1A=ICR1-vAl;
         break;
       case 12:
