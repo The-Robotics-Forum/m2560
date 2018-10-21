@@ -294,42 +294,36 @@ void digitalWrite (uint8_t pInno ,uint8_t mOde)
 
 uint8_t digitalRead(uint8_t pInno)
 {
-	uint8_t z;				//not a good practice
-	uint8_t x;				//not a good practice
+	uint8_t digitalstatus;
+	uint8_t reference=0;				//not a good practice
    switch(rEgister[pInno])
-         {
-
-	        case'b':
-	            z=PINB&(1<<bIt[pInno]);
-			    break;
-
-	        case'c':
-	            z=PINC&(1<<bIt[pInno]);
-			    break;
-
-	        case'd':
-	            z=PIND&(1<<bIt[pInno]);
-			    break;
-
-		    case'e':
-	            z=PINE&(1<<bIt[pInno]);
-			    break;
-
-			case'g':
-	            z=PING&(1<<bIt[pInno]);
-			    break;
-
-			case'h':
-	            z=PINH&(1<<bIt[pInno]);
-			    break;
-
-			case'j':
-	            z=PINJ&(1<<bIt[pInno]);
-			    break;
-
-			case'l':
-	            z=PINL&(1<<bIt[pInno]);
-			    break;
+      {   case'a':reference=(1<<bIt[pInno]);
+				          digitalstatus=PINA&reference;
+									break;
+	        case'b': reference=(1<<bIt[pInno]);
+				    	    digitalstatus=PINB&reference;
+			            break;
+	        case'c':reference=(1<<bIt[pInno]);
+					        digitalstatus=PINC&reference;
+			            break;
+	        case'd':reference=(1<<bIt[pInno]);
+					        digitalstatus=PIND&reference;
+			            break;
+		      case'e':reference=(1<<bIt[pInno]);
+			            digitalstatus=PINE&reference;
+			            break;
+		    	case'g':reference=(1<<bIt[pInno]);
+			            digitalstatus=PING&reference;
+			            break;
+			    case'h':reference=(1<<bIt[pInno]);
+		              digitalstatus=PINH&reference;
+		              break;
+			    case'j':reference=(1<<bIt[pInno]);
+		              digitalstatus=PINJ&reference;
+		              break;
+			    case'l':reference=(1<<bIt[pInno]);
+			            digitalstatus=PINL&reference;
+			            break;
 	     }
 }
 //FIXM
