@@ -1,12 +1,16 @@
-/******************************************************
- |		#########   #########	#########	          |
- |		    #       #       #   #		              |
- | 		    #       #       #   #		              |
- |		    #       #########	######		          |
- |		    #       #  #        #		              |
- |		    #       #     #     #		              |
- |		    #       #       #   #		              |
- *******************************************************/
+/***********************************************
+ |		#########   #########	#########	   |
+ |		    #       #       #   #		       |
+ | 		    #       #       #   #		       |
+ |		    #       #########	######		   |
+ |		    #       #  #        #		       |
+ |		    #       #     #     #		       |
+ |		    #       #       #   #		       |
+ |               Varun Gujarathi               |
+ |               Parth Basole                  |
+ |               Chaitanya Ashtekar            |
+ |               Sakshi Rathi                  |
+ **********************************************/
 /*************INDEX******************
 *BUG – a known bug that should be corrected.
 *FIXME – should be corrected.
@@ -328,7 +332,7 @@ uint8_t digitalRead(uint8_t pInno)
 return digitalstatus;
 }
 //FIXM
-/*static void turnOffPWM(uint8_t tImer)
+static void turnOffPWM(uint8_t tImer)
 {
 	switch (tImer)
 	{
@@ -390,7 +394,7 @@ return digitalstatus;
 		#endif
 	}
 }
-*/
+
 long unsigned int microsecondsToInches(long unsigned int mIcroseconds)
 {
   // According to Parallax's datasheet for the PING))), there are 73.746
