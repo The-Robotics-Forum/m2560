@@ -23,6 +23,7 @@
 
 /*
 TODO: Add Toggle Mode in pinMode and digitalWrite function
+TODO: Enable the millis() function
 */
 #include <avr/io.h>
 #include <stdlib.h>
