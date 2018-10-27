@@ -880,11 +880,11 @@ ISR (TIMER2_COMPA_vect)
 
 void tinit()
 {
-	TCCR0A|= (1 << WGM02) | (1 << CS01);
-
+	TCCR0A|=(1<<WGM10)|(1<<WGM12)|(1<<COM1A1);
+    TCCR0B|=(1<<CS11)|(1<<CS10);
 	// Load the high byte, then the low byte
 	// into the output compare
-	OCR0A = CTC_MATCH_OVERFLOW;
+    // OCR0A = CTC_MATCH_OVERFLOW;
 
 	// Enable the compare match interrupt
 	TIMSK0 |= (1 << OCIE0A);
