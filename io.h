@@ -884,7 +884,11 @@ void tinit()
     TCCR0B|=(1<<CS11)|(1<<CS10);
 	// Load the high byte, then the low byte
 	// into the output compare
+<<<<<<< HEAD
      OCR0A = CTC_MATCH_OVERFLOW;
+=======
+    // OCR0A = CTC_MATCH_OVERFLOW;
+>>>>>>> c55e1d0d2d075cb0768498bd83d668981bf96e5b
 
 	// Enable the compare match interrupt
 	TIMSK0 |= (1 << OCIE0A);
