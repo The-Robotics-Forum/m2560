@@ -139,8 +139,6 @@ void pinMode(uint8_t , uint8_t );
 static void turnOffPWM(uint8_t );
 void digitalWrite(uint8_t , uint8_t );
 uint8_t digitalRead(uint8_t );
-long unsigned int microsecondsToInches(long unsigned int);
-long unsigned int microsecondsToCentimeters(long unsigned int);
 void setup(void);
 void loop(void);
 
@@ -332,8 +330,8 @@ uint8_t digitalRead(uint8_t pInno)
 	     }
 return digitalstatus;
 }
-//FIXM
-static void turnOffPWM(uint8_t tImer)
+//FIXME
+/*static void turnOffPWM(uint8_t tImer)
 {
 	switch (tImer)
 	{
@@ -395,23 +393,7 @@ static void turnOffPWM(uint8_t tImer)
 		#endif
 	}
 }
-
-long unsigned int microsecondsToInches(long unsigned int mIcroseconds)
-{
-  // According to Parallax's datasheet for the PING))), there are 73.746
-  // microseconds per inch (i.e. sound travels at 1130 feet per second).
-  // This gives the distance travelled by the ping, outbound and return,
-  // so we divide by 2 to get the distance of the obstacle.
-  return (mIcroseconds*0.00669/ 2);
-}
-
-long unsigned int microsecondsToCentimeters(long unsigned int microseconds)
-{
-  // The speed of sound is 340 m/s or 29 microseconds per centimeter.
-  // The ping travels out and back, so to find the distance of the object we
-  // take half of the distance travelled.
-  return (microseconds*0.17/ 2);
-}
+*/
 
 /*unsigned long pulseIn(volatile uint8_t pInno, uint8_t vAlue)
 {
