@@ -16,12 +16,13 @@ int pulsein(uint8_t eCho)
 	switch(eCho)
 	{
 		case 48:
+			 DDRL&=~(1<<PL1);
 			 sei();                 // Enable global interrupt 
   			 TIMSK5= (1 << TOIE5);  // Enable Timer5 overflow interrupts 
   			 TCCR5B|=(1<<ICES5)|(1<<CS51)|(1<<CS50);   //Capture on rising edge, 64 prescaler
     		 TIFR5|=1<<ICF5;                           // Clear ICP flag (Input Capture flag) 
     		 TIFR5|=1<<TOV5;                           // Clear Timer Overflow flag */
-   			 while ((TIFR5 & (1 << ICF5)) == 0)       //Wait for rising edge 
+   			 while ((TIFR5 & (1 << ICF5)) == 0);       //Wait for rising edge 
 		     TCNT5 = 0;                                // Clear Timer counter 
 		     TCCR5B&=~(1<<ICES1);                      //Capture on falling edge, 64prescaler 
 		     TIFR5|=1<<ICF5;                           //Clear ICP flag (Input Capture flag) 
@@ -38,6 +39,7 @@ int pulsein(uint8_t eCho)
 			 break;			   
 
 		case 49:
+			  DDRL&=~(1<<PL0);
 			  sei();                 // Enable global interrupt 
   			  TIMSK4= (1 << TOIE4);  // Enable Timer4 overflow interrupts 
   			  TCCR4B|=(1<<ICES4)|(1<<CS41)|(1<<CS40);   //Capture on rising edge, 64 prescaler
