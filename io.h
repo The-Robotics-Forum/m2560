@@ -35,7 +35,7 @@ TODO: Enable the millis() function
 #include <avr/interrupt.h>
 #include <util/atomic.h>
 #ifndef F_CPU
-#define F_CPU 1000000UL   //SET CPU CLOCK
+#define F_CPU 16000000UL   //SET CPU CLOCK
 #endif
 #include <util/delay.h>
 #define CTC_MATCH_OVERFLOW ((F_CPU / 1000) / 8)
@@ -43,7 +43,7 @@ TODO: Enable the millis() function
 const uint8_t OUTPUT=1,INPUT=0;
 const uint8_t HIGH=1,LOW=0;
 const uint8_t RISING=2,FALLING=3,CHANGE=4;
-volatile unsigned long tImer2_millis;
+volatile unsigned long tImer0_millis;
 //pinMapping
 int bIt[]={
 	 0 	, // PE 0 ** 0 ** USART0_RX
@@ -866,12 +866,8 @@ void tinit()
     TCCR0B|=(1<<CS11)|(1<<CS10);
 	// Load the high byte, then the low byte
 	// into the output compare
-<<<<<<< HEAD
      OCR0A = CTC_MATCH_OVERFLOW;
-=======
     // OCR0A = CTC_MATCH_OVERFLOW;
->>>>>>> c55e1d0d2d075cb0768498bd83d668981bf96e5b
-
 	// Enable the compare match interrupt
 	TIMSK0 |= (1 << OCIE0A);
 
