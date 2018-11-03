@@ -8,10 +8,10 @@ Since ICP1 and ICP3 are for CLK we cannot use them here
 
 //PL0=49(ICP4)
 //PL1=48(ICP5)
-uint32_t tIme=0;
+double tIme=0;
 volatile uint8_t tImeroVerfLow; //declaring as volatile since it has to be changed in ISR 
 
-int pulsein(uint8_t eCho)
+double pulsein(uint8_t eCho)
 {	tImeroVerfLow=0;			//resetting timeroverflow
 	switch(eCho)
 	{
