@@ -1,99 +1,22 @@
-/***********************************************
- |		#########   #########	#########      |
- |		    #       #       #   #              |
- | 		    #       #       #   #              |
- |		    #       #########	######         |
- |		    #       #  #        #              |
- |		    #       #     #     #              |
- |		    #       #       #   #              |
- |               Varun Gujarathi               |
- |               Parth Basole                  |
- |               Chaitanya Ashtekar            |
- |               Sakshi Rathi                  |
- **********************************************/
-/*************INDEX******************
-*BUG – a known bug that should be corrected.
-*FIXME – should be corrected.
-*HACK – a workaround.
-*TODO – something to be done.
-*UNDONE – a reversal or "roll back" of previous code.
-*XXX – warn other programmers of problematic or misguiding code
-*/
+
 
 
 /*
 TODO: Add Toggle Mode in pinMode and digitalWrite function
 TODO: Enable the millis() function
 */
-#ifndef io_h
-#define io_h
-
 #include <avr/io.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
 #include <avr/pgmspace.h>
+#include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/atomic.h>
-	#ifndef F_CPU
-	#define F_CPU 16000000UL   //SET CPU CLOCK
-	#endif
+
 #include <util/delay.h>
-#define HIGH 0x1
-#define LOW  0x0
-
-#define INPUT 0x0
-#define OUTPUT 0x1
-#define INPUT_PULLUP 0x2
-
-#define PI 3.1415926535897932384626433832795
-#define HALF_PI 1.5707963267948966192313216916398
-#define TWO_PI 6.283185307179586476925286766559
-#define DEG_TO_RAD 0.017453292519943295769236907684886
-#define RAD_TO_DEG 57.295779513082320876798154814105
-#define EULER 2.718281828459045235360287471352
-
-#define SERIAL  0x0
-#define DISPLAY 0x1
-
-#define LSBFIRST 0
-#define MSBFIRST 1
-
-#define CHANGE 1
-#define FALLING 2
-#define RISING 3
-
-#ifdef abs
-#undef abs
-#endif
-
-#define min(a,b) ((a)<(b)?(a):(b))
-#define max(a,b) ((a)>(b)?(a):(b))
-#define abs(x) ((x)>0?(x):-(x))
-#define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
-#define round(x)     ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
-#define radians(deg) ((deg)*DEG_TO_RAD)
-#define degrees(rad) ((rad)*RAD_TO_DEG)
-#define sq(x) ((x)*(x))
-
-#define interrupts() sei()
-#define noInterrupts() cli()
-
-#define clockCyclesPerMicrosecond() ( F_CPU / 1000000L )
-#define clockCyclesToMicroseconds(a) ( (a) / clockCyclesPerMicrosecond() )
-#define microsecondsToClockCycles(a) ( (a) * clockCyclesPerMicrosecond() )
-
-#define lowByte(w) ((uint8_t) ((w) & 0xff))
-#define highByte(w) ((uint8_t) ((w) >> 8))
-
-#define bitRead(value, bit) (((value) >> (bit)) & 0x01)
-#define bitSet(value, bit) ((value) |= (1UL << (bit)))
-#define bitClear(value, bit) ((value) &= ~(1UL << (bit)))
-#define bitWrite(value, bit, bitvalue) (bitvalue ? bitSet(value, bit) : bitClear(value, bit))
-
 #define CTC_MATCH_OVERFLOW ((F_CPU / 1000) / 8)
-
 /**************************************************************************************************************************/
 const uint8_t OUTPUT=1,INPUT=0;
 const uint8_t HIGH=1,LOW=0;
@@ -386,7 +309,7 @@ uint8_t digitalRead(uint8_t pInno)
 return digitalstatus;
 }
 //FIXME
-static void turnOffPWM(uint8_t tImer)
+/*static void turnOffPWM(uint8_t tImer)
 {
 	switch (tImer)
 	{
@@ -448,9 +371,171 @@ static void turnOffPWM(uint8_t tImer)
 		#endif
 	}
 }
+*/
 
+/*unsigned long pulseIn(volatile uint8_t pInno, uint8_t vAlue)
+{
+	char x;
+  TCCR2A = (1 << WGM21) | (1 << COM2A1) | (1 << FOC2A) | (0 << COM2A0) | (0 << WGM20); //initializing in CTC mode
+  TCCR2A = (1 << CS20);
+  unsigned long mAxloops = 500000;
+  unsigned long wIdth = 0;
+  // wait for any previous pulse to end
+  switch(rEgister[pInno]){
+            case'b':
+	               { while (((PINB) && ((bIt[pInno]))) == vAlue)
+	              {
+		          if (--mAxloops == 0)
+		            return 0;
+	                }
+             // wait for the pulse to start
+              while (((PINB) && (bIt[pInno])) != vAlue)
+	              {
+		     if (--mAxloops == 0)
+		          return 0;
+	           }
+            // wait for the pulse to stop
+             while (((PINB) && (bIt[pInno])) == vAlue)
+	                   {
+	               	if (++wIdth == mAxloops)
+		          return 0;
+	                      }
+              return wIdth;
+                    }  break;
+ case'c':
+	                 { while (((PINC) && (bIt[pInno])) == vAlue)
+	                {
+		              if (--mAxloops == 0)
+		               return 0;
+	                   }
+  // wait for the pulse to start
+                  while (((PINC) && (bIt[pInno])) != vAlue)
+	                  {
+		              if (--mAxloops == 0)
+		                 return 0;
+	                      }
+  // wait for the pulse to stop
+                while (((PINC) && (bIt[pInno])) == vAlue)
+	                 {
+                 		if (++wIdth == mAxloops)
+                  		return 0;
+                     	    }
+                     return wIdth;
+                         }break;
 
+	 case'd':
 
+	                 { while (((PIND) && (bIt[pInno])) == vAlue)
+	                {
+		              if (--mAxloops == 0)
+		               return 0;
+	                   }
+  // wait for the pulse to start
+                  while (((PIND) && (bIt[pInno])) != vAlue)
+	                  {
+		              if (--mAxloops == 0)
+		                 return 0;
+	                      }
+  // wait for the pulse to stop
+                while (((PIND) && (bIt[pInno])) == vAlue)
+	                 {
+                 		if (++wIdth == mAxloops)
+                  		return 0;
+                     	    }
+                     return wIdth;
+                         } break; 		//case'h':
+				  //  DDRH|(0<<bIt[pInno]);
+	case'e':
+
+	                 { while (((PINE) && (bIt[pInno])) == vAlue)
+	                {
+		              if (--mAxloops == 0)
+		               return 0;
+	                   }
+  // wait for the pulse to start
+                  while (((PINE) && (bIt[pInno])) != vAlue)
+	                  {
+		              if (--mAxloops == 0)
+		                 return 0;
+	                      }
+  // wait for the pulse to stop
+                while (((PINE) && (bIt[pInno])) == vAlue)
+	                 {
+                 		if (++wIdth == mAxloops)
+                  		return 0;
+                     	    }
+                     return wIdth;
+                         } break;
+
+case'h':
+
+	                 { while (((PINH) &&(bIt[pInno])) == vAlue)
+	                {
+		              if (--mAxloops == 0)
+		               return 0;
+	                   }
+  // wait for the pulse to start
+                  while (((PINH) && (bIt[pInno])) != vAlue)
+	                  {
+		              if (--mAxloops == 0)
+		                 return 0;
+	                      }
+  // wait for the pulse to stop
+                while (((PINH) && ((bIt[pInno]))) == vAlue)
+	                 {
+                 		if (++wIdth == mAxloops)
+                  		return 0;
+                     	    }
+                     return wIdth;
+                         } break;
+case'j':
+
+	                 { while (((PINJ) && (bIt[pInno])) == vAlue)
+	                {
+		              if (--mAxloops == 0)
+		               return 0;
+	                   }
+  // wait for the pulse to start
+                  while (((PINJ) && (bIt[pInno])) != vAlue)
+	                  {
+		              if (--mAxloops == 0)
+		                 return 0;
+	                      }
+  // wait for the pulse to stop
+                while (((PINJ) && (bIt[pInno])) == vAlue)
+	                 {
+                 		if (++wIdth == mAxloops)
+                  		return 0;
+                     	    }
+                     return wIdth;
+                         }
+			           break;
+case 'l':
+
+	                 { while (((PINL) && (bIt[pInno])) == vAlue)
+	                {
+		              if (--mAxloops == 0)
+		               return 0;
+	                   }
+  // wait for the pulse to start
+                  while (((PINL) && (bIt[pInno])) != vAlue)
+	                  {
+		              if (--mAxloops == 0)
+		                 return 0;
+	                      }
+  // wait for the pulse to stop
+                while (((PINL) && (bIt[pInno])) == vAlue)
+	                 {
+                 		if (++wIdth == mAxloops)
+                  		return 0;
+                     	    }
+                     return wIdth;
+                         }
+			           break;
+	     			}
+	}
+
+*/
 class Serial
 {
 	public:
@@ -1004,158 +1089,6 @@ ISR(TIMER1_OVF_vect)
 {
 	uSerfun();
 }*/
-void init()
-{
-	// this needs to be called before setup() or some functions won't
-	// work there
-	sei();
-	
-	// on the ATmega168, timer 0 is also used for fast hardware pwm
-	// (using phase-correct PWM would mean that timer 0 overflowed half as often
-	// resulting in different millis() behavior on the ATmega8 and ATmega168)
-#if defined(TCCR0A) && defined(WGM01)
-	sbi(TCCR0A, WGM01);
-	sbi(TCCR0A, WGM00);
-#endif
-
-	// set timer 0 prescale factor to 64
-#if defined(__AVR_ATmega128__)
-	// CPU specific: different values for the ATmega128
-	sbi(TCCR0, CS02);
-#elif defined(TCCR0) && defined(CS01) && defined(CS00)
-	// this combination is for the standard atmega8
-	sbi(TCCR0, CS01);
-	sbi(TCCR0, CS00);
-#elif defined(TCCR0B) && defined(CS01) && defined(CS00)
-	// this combination is for the standard 168/328/1280/2560
-	sbi(TCCR0B, CS01);
-	sbi(TCCR0B, CS00);
-#elif defined(TCCR0A) && defined(CS01) && defined(CS00)
-	// this combination is for the __AVR_ATmega645__ series
-	sbi(TCCR0A, CS01);
-	sbi(TCCR0A, CS00);
-#else
-	#error Timer 0 prescale factor 64 not set correctly
-#endif
-
-	// enable timer 0 overflow interrupt
-#if defined(TIMSK) && defined(TOIE0)
-	sbi(TIMSK, TOIE0);
-#elif defined(TIMSK0) && defined(TOIE0)
-	sbi(TIMSK0, TOIE0);
-#else
-	#error	Timer 0 overflow interrupt not set correctly
-#endif
-
-	// timers 1 and 2 are used for phase-correct hardware pwm
-	// this is better for motors as it ensures an even waveform
-	// note, however, that fast pwm mode can achieve a frequency of up
-	// 8 MHz (with a 16 MHz clock) at 50% duty cycle
-
-#if defined(TCCR1B) && defined(CS11) && defined(CS10)
-	TCCR1B = 0;
-
-	// set timer 1 prescale factor to 64
-	sbi(TCCR1B, CS11);
-#if F_CPU >= 8000000L
-	sbi(TCCR1B, CS10);
-#endif
-#elif defined(TCCR1) && defined(CS11) && defined(CS10)
-	sbi(TCCR1, CS11);
-#if F_CPU >= 8000000L
-	sbi(TCCR1, CS10);
-#endif
-#endif
-	// put timer 1 in 8-bit phase correct pwm mode
-#if defined(TCCR1A) && defined(WGM10)
-	sbi(TCCR1A, WGM10);
-#endif
-
-	// set timer 2 prescale factor to 64
-#if defined(TCCR2) && defined(CS22)
-	sbi(TCCR2, CS22);
-#elif defined(TCCR2B) && defined(CS22)
-	sbi(TCCR2B, CS22);
-//#else
-	// Timer 2 not finished (may not be present on this CPU)
-#endif
-
-	// configure timer 2 for phase correct pwm (8-bit)
-#if defined(TCCR2) && defined(WGM20)
-	sbi(TCCR2, WGM20);
-#elif defined(TCCR2A) && defined(WGM20)
-	sbi(TCCR2A, WGM20);
-//#else
-	// Timer 2 not finished (may not be present on this CPU)
-#endif
-
-#if defined(TCCR3B) && defined(CS31) && defined(WGM30)
-	sbi(TCCR3B, CS31);		// set timer 3 prescale factor to 64
-	sbi(TCCR3B, CS30);
-	sbi(TCCR3A, WGM30);		// put timer 3 in 8-bit phase correct pwm mode
-#endif
-
-#if defined(TCCR4A) && defined(TCCR4B) && defined(TCCR4D) /* beginning of timer4 block for 32U4 and similar */
-	sbi(TCCR4B, CS42);		// set timer4 prescale factor to 64
-	sbi(TCCR4B, CS41);
-	sbi(TCCR4B, CS40);
-	sbi(TCCR4D, WGM40);		// put timer 4 in phase- and frequency-correct PWM mode	
-	sbi(TCCR4A, PWM4A);		// enable PWM mode for comparator OCR4A
-	sbi(TCCR4C, PWM4D);		// enable PWM mode for comparator OCR4D
-#else /* beginning of timer4 block for ATMEGA1280 and ATMEGA2560 */
-#if defined(TCCR4B) && defined(CS41) && defined(WGM40)
-	sbi(TCCR4B, CS41);		// set timer 4 prescale factor to 64
-	sbi(TCCR4B, CS40);
-	sbi(TCCR4A, WGM40);		// put timer 4 in 8-bit phase correct pwm mode
-#endif
-#endif /* end timer4 block for ATMEGA1280/2560 and similar */	
-
-#if defined(TCCR5B) && defined(CS51) && defined(WGM50)
-	sbi(TCCR5B, CS51);		// set timer 5 prescale factor to 64
-	sbi(TCCR5B, CS50);
-	sbi(TCCR5A, WGM50);		// put timer 5 in 8-bit phase correct pwm mode
-#endif
-
-#if defined(ADCSRA)
-	// set a2d prescaler so we are inside the desired 50-200 KHz range.
-	#if F_CPU >= 16000000 // 16 MHz / 128 = 125 KHz
-		sbi(ADCSRA, ADPS2);
-		sbi(ADCSRA, ADPS1);
-		sbi(ADCSRA, ADPS0);
-	#elif F_CPU >= 8000000 // 8 MHz / 64 = 125 KHz
-		sbi(ADCSRA, ADPS2);
-		sbi(ADCSRA, ADPS1);
-		cbi(ADCSRA, ADPS0);
-	#elif F_CPU >= 4000000 // 4 MHz / 32 = 125 KHz
-		sbi(ADCSRA, ADPS2);
-		cbi(ADCSRA, ADPS1);
-		sbi(ADCSRA, ADPS0);
-	#elif F_CPU >= 2000000 // 2 MHz / 16 = 125 KHz
-		sbi(ADCSRA, ADPS2);
-		cbi(ADCSRA, ADPS1);
-		cbi(ADCSRA, ADPS0);
-	#elif F_CPU >= 1000000 // 1 MHz / 8 = 125 KHz
-		cbi(ADCSRA, ADPS2);
-		sbi(ADCSRA, ADPS1);
-		sbi(ADCSRA, ADPS0);
-	#else // 128 kHz / 2 = 64 KHz -> This is the closest you can get, the prescaler is 2
-		cbi(ADCSRA, ADPS2);
-		cbi(ADCSRA, ADPS1);
-		sbi(ADCSRA, ADPS0);
-	#endif
-	// enable a2d conversions
-	sbi(ADCSRA, ADEN);
-#endif
-
-	// the bootloader connects pins 0 and 1 to the USART; disconnect them
-	// here so they can be used as normal digital i/o; they will be
-	// reconnected in Serial.begin()
-#if defined(UCSRB)
-	UCSRB = 0;
-#elif defined(UCSR0B)
-	UCSR0B = 0;
-#endif
-}
 int main(){
 	//tinit();
 	setup();
