@@ -27,7 +27,7 @@ int pulsein(uint8_t eCho)
 		     TCCR5B&=~(1<<ICES1);                      //Capture on falling edge, 64prescaler 
 		     TIFR5|=1<<ICF5;                           //Clear ICP flag (Input Capture flag) 
 		     TIFR5|=1<<TOV5;                           // Clear Timer Overflow flag 
-		     TimerOverflow=0;                          // Clear Timer overflow count 
+		     tImerOverflow=0;                          // Clear Timer overflow count 
 		     while ((TIFR5&(1<<ICF5))==0)              //Wait for falling edge 
 		     {
 		     	if(tImeroVerfLow>=8)					//if pulse width is greater than 2.097s
@@ -35,7 +35,7 @@ int pulsein(uint8_t eCho)
 		     }
 		     tIme=ICR5*4+(65535*4*TimerOverflow);     //value of timer when ICF flag is set is stored in ICR 
 			 if(tImeroVerfLow>=8)
-			 	tIme=0;
+			    tIme=0;
 			 break;			   
 
 		case 49:
@@ -50,13 +50,13 @@ int pulsein(uint8_t eCho)
 		      TCCR4B&=~(1<<ICES4);                      //Capture on falling edge, 1024 prescaler 
 		   	  TIFR4|=1<<ICF4;                           //Clear ICP flag (Input Capture flag) 
 		   	  TIFR4|=1<<TOV4;                           // Clear Timer Overflow flag 
-		   	  TimerOverflow=0;                          // Clear Timer overflow count 
+		   	  tImerOverflow=0;                          // Clear Timer overflow count 
 			  while ((TIFR4&(1<<ICF4))==0);             //Wait for falling edge 
 			  {
 			  	  if(tImeroVerfLow>=8)
 					break;			  	  	 
 			  }		      
-		      tIme=ICR4*4+(65535*4*TimerOverflow);    //value of timer when ICF flag is set is stored in ICR 
+		      tIme=ICR4*4+(65535*4*tImerOverflow);    //value of timer when ICF flag is set is stored in ICR 
 		      if(tImeroVerfLow>=8)
 		      	tIme=0;
 		      break;
