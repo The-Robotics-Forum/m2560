@@ -44,6 +44,7 @@ const uint8_t OUTPUT=1,INPUT=0;
 const uint8_t HIGH=1,LOW=0;
 const uint8_t RISING=2,FALLING=3,CHANGE=4;
 volatile unsigned long tImer0_millis;
+volatile int  x;
 //pinMapping
 int bIt[]={
 	 0 	, // PE 0 ** 0 ** USART0_RX
@@ -858,6 +859,15 @@ unsigned long millis ()
 ISR (TIMER0_COMPA_vect)
 {
     tImer0_millis++;
+}
+
+int mIcros()
+{float l;
+  l=(x*0.16+0.00000625*TCNT2)*(10^6);
+return l;
+}
+ISR(TIMER2_OVF_vect)
+{x++;  
 }
 
 void tinit()
