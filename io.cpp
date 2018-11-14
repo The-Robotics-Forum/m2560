@@ -1,4 +1,4 @@
-
+#include<io.h>
 //Functions:
 
 void pinMode(uint8_t pInno,uint8_t mOde)
