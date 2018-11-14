@@ -1,12 +1,6 @@
 
-class Servo{
-private:
-  int iCr;
 
-public:
-  uint8_t pIn;
-  
-  void attach(uint8_t nUm)       //F_CPU=clock frequency and num=pin no.to be attached
+  void Servo::attach(uint8_t nUm)       //F_CPU=clock frequency and num=pin no.to be attached
   {
     iCr=19999;
     pIn=nUm;
@@ -94,7 +88,7 @@ public:
      }
   }
 
-  void write(int vAl)           //PIN=servo pin no. on mega,vAl=angle F_CPU for the servo at pin
+  void Servo::write(int vAl)           //PIN=servo pin no. on mega,vAl=angle F_CPU for the servo at pin
   {
     vAl=constraint(mapAngle(vAl,0,200,iCr/39,iCr/8.3),iCr/40,iCr/8);
     switch(pIn)
@@ -140,7 +134,7 @@ public:
    //_delay_ms(500);                              //give delay in the main code
   }
 
-  void dettach(int pin1)                   //pin1=pin no. to be deattached
+  void Servo::dettach(int pin1)                   //pin1=pin no. to be deattached
   {
    switch(pin1)
     {
@@ -236,11 +230,11 @@ public:
         break; 
     }   
   }
-  long mapAngle(long x, long in_min, long in_max, long out_min, long out_max)
+  long Servo::mapAngle(long x, long in_min, long in_max, long out_min, long out_max)
   {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
-  long constraint(long nUm,long lOwer,long uPper)
+  long Servo::constraint(long nUm,long lOwer,long uPper)
   {
     if(nUm>uPper){
       return uPper;}
@@ -249,4 +243,4 @@ public:
     else 
     return nUm; 
   }
-};
+
