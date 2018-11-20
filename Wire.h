@@ -1,8 +1,6 @@
 
 
-#include <avr/io.h>
-#define  TWI_FREQ 100000L
-#define F_CPU 1000000UL
+
 class Wire
 {
 public:
