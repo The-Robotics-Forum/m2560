@@ -1,10 +1,20 @@
-
+#define  TWI_FREQ 100000L
+//#define F_CPU 1000000UL
 
 
 class Wire
 {
 public:
-
+bool available()
+{
+if (PORTC ==3)
+{
+	return(1);
+}	
+else
+return (2);
+	
+}
 
 void begin()
 {DDRC|=0b00000011;
@@ -13,7 +23,7 @@ void begin()
  TWCR=(1<<TWSTA)|(1<<TWINT)|(1<<TWEN);
 }
 void begin(uint8_t sLave_address)
-{TWAR=sLave_address;	
+{TWAR=(sLave_address||0b00000001);	
  TWBR=((F_CPU/TWI_FREQ)-16)/2;
   TWCR=(1<<TWEN)|(1<<TWEA)|(1<<TWINT);
 }
