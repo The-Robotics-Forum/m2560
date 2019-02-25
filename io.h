@@ -1,4 +1,4 @@
-/***********************************************
+/*******************************************************
  |		#########   #########	#########      |
  |		    #       #       #   #              |
  | 		    #       #       #   #              |
@@ -6,11 +6,11 @@
  |		    #       #  #        #              |
  |		    #       #     #     #              |
  |		    #       #       #   #              |
- |               Varun Gujarathi               |
- |               Parth Basole                  |
- |               Chaitanya Ashtekar            |
- |               Sakshi Rathi                  |
- **********************************************/
+ |               Varun Gujarathi                       |
+ |               Parth Basole                          |
+ |               Chaitanya Ashtekar                    |
+ |               Sakshi Rathi                          |
+ ******************************************************/
 /*************INDEX******************
 *BUG – a known bug that should be corrected.
 *FIXME – should be corrected.
